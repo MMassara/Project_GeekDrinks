@@ -21,5 +21,3 @@ module.exports = (sequelize, DataTypes) => {
   };
   return User;
 };
-
-export default userModel;
