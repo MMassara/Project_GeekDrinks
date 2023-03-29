@@ -4,11 +4,11 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
-    role: DataTypes.STRING,
-  },{
+    name: DataTypes.string,
+    email: DataTypes.string,
+    password: DataTypes.string,
+    role: DataTypes.string,
+  }, { 
     underscored: true,
     tableName: 'users',
     timestamps: false,
@@ -21,3 +21,5 @@ module.exports = (sequelize, DataTypes) => {
   };
   return User;
 };
+
+export default userModel;
