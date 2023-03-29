@@ -22,12 +22,12 @@ const salesProductsModel = (sequelize, DataTypes) => {
 
   SalesProduct.associate = ({ Sale, Product }) => {
     Sale.belongsToMany(Sale,  {
-      foreignKey: 'saleId', as: 'sales',
+      foreignKey: 'saleId', as: 'salesProduct',
       through: SalesProduct,
       otherKey: 'productId'
     })
     Product.belongsToMany(Product, {
-      foreignKey: 'productId', as: 'products',
+      foreignKey: 'productId', as: 'salesProduct',
       through: SalesProduct,
       otherKey: 'saleId'
     })
@@ -36,4 +36,4 @@ const salesProductsModel = (sequelize, DataTypes) => {
   return SalesProduct;
 };
 
-export default salesProductsModel;
+module.exports = salesProductsModel;
