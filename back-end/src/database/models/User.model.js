@@ -1,26 +1,23 @@
-const userModel = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     id: { type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.string,
-    email: DataTypes.string,
-    password: DataTypes.string,
-    role: DataTypes.string,
-  }, { timestamp: false,
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    role: DataTypes.STRING,
+  },{
     underscored: true,
     tableName: 'users',
-    modelName: 'User',
+    timestamps: false,
   });
 
   User.associate = ({ Sale }) => {
     User.hasMany(Sale, {
       foreignKey: 'userId', as: 'sales',
-    })
+    });
   };
-
   return User;
 };
-
-export default userModel;

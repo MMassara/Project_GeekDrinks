@@ -1,4 +1,4 @@
-const saleModel = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const Sale = sequelize.define('Sale', {
     id: { 
       type: DataTypes.INTEGER,
@@ -13,11 +13,11 @@ const saleModel = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       foreignKey: true
     },
-    totalPrice: DataTypes.decimal(9, 2),
-    deliveryAddress: DataTypes.string,
-    deliveryNumber: DataTypes.string,
-    saleDate: { type: DataTypes.date, defaultValue: DataTypes.NOW },
-    status: { type: DataTypes.string, defaultValue: 'pendente' },
+    totalPrice: DataTypes.DECIMAL(9, 2),
+    deliveryAddress: DataTypes.STRING,
+    deliveryNumber: DataTypes.STRING,
+    saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+    status: { type: DataTypes.STRING, defaultValue: 'pendente' },
   }, {
     timestamp: false,
     underscored: true,
@@ -28,9 +28,6 @@ const saleModel = (sequelize, DataTypes) => {
   Sale.associate = ({ User, SalesProduct}) => {
     Sale.belongsTo(User, {
       foreignKey: 'userId',
-      as: 'users'
-    })
-    Sale.belongsTo(User, {
       foreignKey: 'sellerId',
       as: 'users'
     })
@@ -41,5 +38,3 @@ const saleModel = (sequelize, DataTypes) => {
  
   return Sale;
 };
-
-export default saleModel;
