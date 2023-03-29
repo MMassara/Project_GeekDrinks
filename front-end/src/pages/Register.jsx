@@ -5,18 +5,21 @@ import { checkEmailAndPassword, checkUser } from '../utils/checkUser';
 import dataTestsIds from '../utils/dataTestIds';
 
 export default function Register() {
+  // state para guardar os dados do usuario
   const [user, setUser] = useState({
     email: '', name: '', password: '', role: 'customer',
   });
+  // ativa e desativa o botao cadastre-se
   const [isDisable, setIsDisable] = useState(true);
+  // controla msg de erro
   const [errorMessage, setErrorMessage] = useState('');
-
+  // handlechange generico para controle de input
   const handleChange = ({ target: { name, value } }) => {
     setUser((prevState) => ({ ...prevState, [name]: value }));
   };
-
+  // para mudar de rota
   const history = useHistory();
-
+  // controle de rotas do usuario com base na role
   const translate = {
     administrator: '/administrator/products',
     seller: '/seller/products',
@@ -28,8 +31,10 @@ export default function Register() {
     try {
       const { data } = await loginApi.post('/register', user);
       const { id, ...userInfo } = data;
+      // guarda os dados do usuario do retorno da Api no local storage
       localStorage.setItem('user', JSON.stringify(userInfo));
       localStorage.setItem('userId', JSON.stringify(id));
+      // pega a role da pessoa cadastrada
       history.push(translate[data.role]);
     } catch ({ response: { data: { message } } }) {
       // devolve o erro da Api
