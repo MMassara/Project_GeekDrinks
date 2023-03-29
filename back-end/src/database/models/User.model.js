@@ -4,11 +4,11 @@ const userModel = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.string,
-    email: DataTypes.string,
-    password: DataTypes.string,
-    role: DataTypes.string,
-  }, { timestamp: false,
+    name: DataTypes.STRING,
+    email: DataTypes.STRING,
+    password: DataTypes.STRING,
+    role: DataTypes.STRING,
+  }, { timestamps: false,
     underscored: true,
     tableName: 'users',
     modelName: 'User',
@@ -23,4 +23,4 @@ const userModel = (sequelize, DataTypes) => {
   return User;
 };
 
-export default userModel;
+module.exports = userModel;
