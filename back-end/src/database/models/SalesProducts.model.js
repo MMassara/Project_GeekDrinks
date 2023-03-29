@@ -1,4 +1,4 @@
-const salesProductsModel = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
   const SalesProduct = sequelize.define('SalesProduct', {
     quantity: { 
       type: DataTypes.INTEGER,
@@ -11,7 +11,6 @@ const salesProductsModel = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true
     },
-
   }, 
   { 
     timestamp: false,
@@ -19,7 +18,6 @@ const salesProductsModel = (sequelize, DataTypes) => {
     tableName: 'users',
     modelName: 'User',
   });
-
   SalesProduct.associate = ({ Sale, Product }) => {
     Sale.belongsToMany(Sale,  {
       foreignKey: 'saleId', as: 'salesProduct',
@@ -35,5 +33,3 @@ const salesProductsModel = (sequelize, DataTypes) => {
 
   return SalesProduct;
 };
-
-module.exports = salesProductsModel;
