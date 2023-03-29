@@ -4,9 +4,9 @@ const productModel = (sequelize, DataTypes) => {
       primaryKey: true,
       autoIncrement: true,
     },
-    name: DataTypes.string,
-    price: DataTypes.decimal(4,2),
-    urlImage: DataTypes.string,
+    name: DataTypes.STRING,
+    price: DataTypes.DECIMAL(4,2),
+    urlImage: DataTypes.STRING,
   }, { 
     timestamp: false,
     underscored: true,
@@ -24,4 +24,4 @@ const productModel = (sequelize, DataTypes) => {
   return Product;
 };
 
-export default productModel;
+module.exports = productModel;
