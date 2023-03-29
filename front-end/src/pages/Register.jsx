@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import loginApi from '../axios/config';
 import { checkEmailAndPassword, checkUser } from '../utils/checkUser';
 import dataTestsIds from '../utils/dataTestIds';
 
@@ -8,6 +9,7 @@ export default function Register() {
     email: '', name: '', password: '', role: 'customer',
   });
   const [isDisable, setIsDisable] = useState(true);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = ({ target: { name, value } }) => {
     setUser((prevState) => ({ ...prevState, [name]: value }));
@@ -15,9 +17,24 @@ export default function Register() {
 
   const history = useHistory();
 
+  const translate = {
+    administrator: '/administrator/products',
+    seller: '/seller/products',
+    customer: '/customer/products',
+  };
+
   const register = async (event) => {
     event.preventDefault();
-    console.log('Click no registro');
+    try {
+      const { data } = await loginApi.post('/register', user);
+      const { id, ...userInfo } = data;
+      localStorage.setItem('user', JSON.stringify(userInfo));
+      localStorage.setItem('userId', JSON.stringify(id));
+      history.push(translate[data.role]);
+    } catch ({ response: { data: { message } } }) {
+      // devolve o erro da Api
+      setErrorMessage(message);
+    }
   };
 
   useEffect(() => {
@@ -81,6 +98,13 @@ export default function Register() {
           >
             Já tenho conta
           </button>
+          <span
+            className="registerError"
+            data-testid={ dataTestsIds[10] }
+            style={ { display: errorMessage ? 'block' : 'none' } }
+          >
+            {errorMessage}
+          </span>
         </form>
       </section>
     </section>
