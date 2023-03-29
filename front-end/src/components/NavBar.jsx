@@ -3,10 +3,7 @@ import dataTestsIds from '../utils/dataTestIds';
 
 function NavBar() {
   return (
-    <div 
-      className="container-nav"
-      data-testid='customer_products__element-navbar-link-products'
-    >
+    <div className="container-nav">
       <nav>
         <Link to="/customer/products">
           <div>
@@ -19,7 +16,6 @@ function NavBar() {
             <p data-testid={ dataTestsIds[12] }>Pedidos</p>
           </div>
         </Link>
-        
         <Link to="/">
           <div>
             <p>Logout</p>

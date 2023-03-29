@@ -20,43 +20,57 @@ const mockProducts = [
     name: 'Antarctica Pilsen 300ml',
     price: 2.49,
     url_image: 'https://www.amigao.com/media/catalog/product/C/e/Cerveja_Brahma_Pilsen_Retornavel_300ml_0000020157227_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=310&width=310&canvas=310:310',
-  }
-  
-]
+  },
+];
 
-function Products() {  
-
+function Products() {
   return (
-    <div className='container-product'>
+    <div className="container-product">
       <header>
         <NavBar />
       </header>
       <main>
         {
           mockProducts.map((product) => (
-            <section
-              
-            >
-              <div data-testid={ `${dataTestsIds[15]}${product.id}` }>{ product.name }</div>
-              
-              <div data-testid={ `${dataTestsIds[16]}${product.id}` }>{ product.price }</div>
-
-              <div data-testid={ `${dataTestsIds[17]}${product.id}` }>
-                <img src={product.url_image} alt={product.name} />
+            <section key={ product.name }>
+              <div>
+                <p data-testid={ `${dataTestsIds[15]}${product.id}` }>
+                  { product.name }
+                </p>
               </div>
 
-              <div className='product-quantity'>  
-                <button data-testid={ `${dataTestsIds[19]}${product.id}` }>
+              <div>
+                <p data-testid={ `${dataTestsIds[16]}${product.id}` }>
+                  { product.price }
+                </p>
+              </div>
+
+              <div>
+                <img
+                  data-testid={ `${dataTestsIds[17]}${product.id}` }
+                  src={ product.url_image }
+                  alt={ product.name }
+                />
+              </div>
+
+              <div className="product-quantity">
+                <button
+                  type="button"
+                  data-testid={ `${dataTestsIds[19]}${product.id}` }
+                >
                   -
                 </button>
 
                 <input data-testid={ `${dataTestsIds[20]}${product.id}` } type="number" />
 
-                <button data-testid={ `${dataTestsIds[18]}${product.id}` }>
+                <button
+                  type="button"
+                  data-testid={ `${dataTestsIds[18]}${product.id}` }
+                >
                   +
                 </button>
               </div>
-              
+
             </section>
           ))
         }
