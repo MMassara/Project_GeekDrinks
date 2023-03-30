@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
 export default function LoginForm() {
@@ -67,7 +68,7 @@ export default function LoginForm() {
           // SEND USER TO RGISTER PAGE
           onClick={ () => history.push('/register') }
         >
-          Cadastrar
+          <Link to="/register">Cadastro</Link>
         </button>
         {/* {
           // RETURN BADLOGIN ERROR MESSAGE INCASE EMAIL IS INVALID OR ALREADY IN USE
