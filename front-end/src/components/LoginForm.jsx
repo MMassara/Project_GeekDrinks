@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -9,7 +9,7 @@ export default function LoginForm() {
   // const [badLogin, setBadLogin] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // CREATE VALIDATIONS FOR EMAIL AND PASSWORD
   useEffect(() => {
@@ -67,7 +67,7 @@ export default function LoginForm() {
           // SEND USER TO RGISTER PAGE
           onClick={ () => navigate('/register') }
         >
-          Cadastrar
+          <Link to="/register">Cadastro</Link>
         </button>
         {/* {
           // RETURN BADLOGIN ERROR MESSAGE INCASE EMAIL IS INVALID OR ALREADY IN USE
