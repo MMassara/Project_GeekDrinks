@@ -29,7 +29,7 @@ export default function Register() {
   const register = async (event) => {
     event.preventDefault();
     try {
-      const data = await api;
+      const { data } = await api.post('http://localhost:3001/register', user);
       console.log(data);
       const { id, ...userInfo } = data;
       // guarda os dados do usuario do retorno da Api no local storage
