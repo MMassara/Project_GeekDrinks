@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import loginApi from '../axios/config';
+import api from '../axios/config';
 import { checkEmailAndPassword, checkUser } from '../utils/checkUser';
 import dataTestsIds from '../utils/dataTestIds';
 
@@ -29,7 +29,8 @@ export default function Register() {
   const register = async (event) => {
     event.preventDefault();
     try {
-      const { data } = await loginApi.post('/register', user);
+      const { data } = await api.post('http://localhost:3001/register', user);
+      console.log(data);
       const { id, ...userInfo } = data;
       // guarda os dados do usuario do retorno da Api no local storage
       localStorage.setItem('user', JSON.stringify(userInfo));
