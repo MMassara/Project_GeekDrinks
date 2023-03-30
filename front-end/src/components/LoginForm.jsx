@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -9,7 +10,7 @@ export default function LoginForm() {
   // const [badLogin, setBadLogin] = useState(false);
   // const [errorMessage, setErrorMessage] = useState('');
 
-  // const navigate = useNavigate();
+  const history = useHistory();
 
   // CREATE VALIDATIONS FOR EMAIL AND PASSWORD
   useEffect(() => {
@@ -65,7 +66,7 @@ export default function LoginForm() {
           type="button"
           data-testid="common_login__button-register"
           // SEND USER TO RGISTER PAGE
-          onClick={ () => navigate('/register') }
+          onClick={ () => history.push('/register') }
         >
           <Link to="/register">Cadastro</Link>
         </button>
