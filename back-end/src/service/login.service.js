@@ -14,13 +14,11 @@ const login = async (body) => {
 
   const { role } = result;
   const token = generateToken(body);
-  
 
   const roleObj = {
     role,
-    token
-  }
-
+    token,
+  };
   return roleObj;
 };
 
