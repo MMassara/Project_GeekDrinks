@@ -8,10 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL(4,2),
     urlImage: DataTypes.STRING,
   }, { 
-    timestamp: false,
-    underscored: true,
     tableName: 'products',
-    modelName: 'Product',
+    timestamps: false,
   });
   Product.associate = ({ SalesProduct }) => {
     Product.hasMany(SalesProduct, {
