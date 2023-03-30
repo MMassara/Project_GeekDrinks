@@ -7,7 +7,7 @@ import dataTestsIds from '../utils/dataTestIds';
 export default function Register() {
   // state para guardar os dados do usuario
   const [user, setUser] = useState({
-    email: '', name: '', password: '', role: 'customer',
+    email: '', name: '', password: '',
   });
   // ativa e desativa o botao cadastre-se
   const [isDisable, setIsDisable] = useState(true);
@@ -94,6 +94,7 @@ export default function Register() {
             className="registerBtn"
             disabled={ isDisable }
             data-testid={ dataTestsIds[9] }
+            onClick={ () => history.push('/customer/products') }
           >
             Cadastre-se
           </button>
