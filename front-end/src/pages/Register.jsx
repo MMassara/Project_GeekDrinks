@@ -20,11 +20,6 @@ export default function Register() {
   // para mudar de rota
   const history = useHistory();
   // controle de rotas do usuario com base na role
-  const translate = {
-    administrator: '/administrator/products',
-    seller: '/seller/products',
-    customer: '/customer/products',
-  };
 
   const register = async (event) => {
     event.preventDefault();
@@ -36,7 +31,7 @@ export default function Register() {
       localStorage.setItem('user', JSON.stringify(userInfo));
       localStorage.setItem('userId', JSON.stringify(id));
       // pega a role da pessoa cadastrada
-      history.push(translate[data.role]);
+      history.push('/customer/products');
     } catch ({ response: { data: { message } } }) {
       // devolve o erro da Api
       setErrorMessage(message);
@@ -94,7 +89,6 @@ export default function Register() {
             className="registerBtn"
             disabled={ isDisable }
             data-testid={ dataTestsIds[9] }
-            onClick={ () => history.push('/customer/products') }
           >
             Cadastre-se
           </button>

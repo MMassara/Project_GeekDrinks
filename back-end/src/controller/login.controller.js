@@ -9,7 +9,7 @@ const login = async (req, res) => {
     return res.status(401).json({ message: 'Invalid email or password' });
   }
 
-  res.status(200).json({ token: result });
+  res.status(200).json(result);
 };
 
 module.exports = {
