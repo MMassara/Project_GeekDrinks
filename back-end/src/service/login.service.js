@@ -12,9 +12,16 @@ const login = async (body) => {
     return result;
   }
 
+  const { role } = result;
   const token = generateToken(body);
-  console.log(token);
-  return token;
+  
+
+  const roleObj = {
+    role,
+    token
+  }
+
+  return roleObj;
 };
 
 module.exports = {
