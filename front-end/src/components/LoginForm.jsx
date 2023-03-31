@@ -1,38 +1,69 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import api from '../axios/config';
+import loginApi from '../axios/config';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // const [disableLoginButton, setDisableLoginButton] = useState(true);
+  const [disableLoginButton, setDisableLoginButton] = useState(true);
   // LOGIN ERRORS
-  // const [badLogin, setBadLogin] = useState(false);
-  // const [errorMessage, setErrorMessage] = useState('');
+  const [badLogin, setBadLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const history = useHistory();
 
   // CREATE VALIDATIONS FOR EMAIL AND PASSWORD
-  // useEffect(() => {
-  //   const PASSWORD_LENGTH = 6;
-  //   const validEmail = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i.test(email);
-  //   const validPassword = (password.length >= PASSWORD_LENGTH);
+  useEffect(() => {
+    const PASSWORD_LENGTH = 6;
+    const validEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
+    const validPassword = (password.length >= PASSWORD_LENGTH);
 
-  //   // IF BOTH ARE VALID, ABLE TO PASS - IF NOT, CONTINUE DISABLED
-  //   if (validEmail && validPassword) {
-  //     setDisableLoginButton(false);
-  //   } else {
-  //     setDisableLoginButton(true);
-  //   }
-  // }, [email, password]);
+    // IF BOTH ARE VALID, ABLE TO PASS - IF NOT, CONTINUE DISABLED
+    if (validEmail && validPassword) {
+      setDisableLoginButton(false);
+    } else {
+      setDisableLoginButton(true);
+    }
+  }, [email, password]);
 
-  const login = async () => {
-    const data = await api.post('http://localhost:3001/login', { email, password });
-    console.log(data);
-    // setToken('token');
-  };
+  // const login = async () => {
+  //   const data = await api.post('http://localhost:3001/login', { email, password });
+  //   console.log(data);
+  // };
 
   // FUNCTION DEPENDS BACKEND (data)
+  async function loginManager() {
+    try {
+      setBadLogin(false);
+      const { data } = await loginApi({ email, password, id, role, token });
+      // console.log(data);
+
+      localStorage.setItem('user', JSON.stringify({
+        // SAVE ALL USER DATA
+        id: data.id,
+        name: data.name,
+        email: data.email,
+        role: data.role,
+        token: data.token,
+      }));
+      switch (data.role) {
+      case 'customer':
+        history.push('/customer/products');
+        break;
+      case 'seller':
+        history.push('/seller/orders');
+        break;
+      case 'admin':
+        history.push('/admin/manage');
+        break;
+      default:
+        history.push('/login');
+      }
+    } catch (error) {
+      setBadLogin(true);
+      setErrorMessage(error);
+    }
+  }
 
   return (
     <div>
@@ -66,8 +97,8 @@ export default function LoginForm() {
         <button
           type="button"
           data-testid="common_login__button-login"
-          disabled={ false }
-          onClick={ login }
+          disabled={ disableLoginButton }
+          onClick={ loginManager }
         >
           Login
         </button>
@@ -79,7 +110,7 @@ export default function LoginForm() {
         >
           <Link to="/register">Cadastro</Link>
         </button>
-        {/* {
+        {
           // RETURN BADLOGIN ERROR MESSAGE INCASE EMAIL IS INVALID OR ALREADY IN USE
           badLogin && (
             <span
@@ -88,7 +119,7 @@ export default function LoginForm() {
               { errorMessage }
             </span>
           )
-        } */}
+        }
       </form>
     </div>
   );
