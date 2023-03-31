@@ -26,22 +26,30 @@ export default function LoginForm() {
     }
   }, [email, password]);
 
-  // const loginApi = async () => {
-  //   const data = await api.post('http://localhost:3001/login', { email, password, id, role, token });
-  //   console.log(data);
-  // };
+  const loginApi = async () => {
+    const data = await api.post(
+      'http://localhost:3001/login',
+      { email,
+        password,
+        // id,
+        // role,
+        // token,
+      },
+    );
+    console.log(data);
+  };
 
-  async function loginApi(body) {
-    const res = await api.post('/login', body);
+  // async function loginApi(body) {
+  //   const res = await api.post('/login', body);
 
-    return res;
-  }
+  //   return res;
+  // }
 
   // FUNCTION DEPENDS BACKEND (data)
   async function loginManager() {
     try {
       setBadLogin(false);
-      const { data } = await loginApi({ email, password, id, role, token });
+      const { data } = await loginApi();
 
       localStorage.setItem('user', JSON.stringify({
         // SAVE ALL USER DATA
