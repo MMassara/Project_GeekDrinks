@@ -25,7 +25,14 @@ const get = async () => {
     return result;
 };
 
+const getById = async (id) => {
+    const result = await Sale.findOne({ where: +id });
+
+    return result;
+};
+
 module.exports = {
     createSale,
     get,
+    getById,
 };
