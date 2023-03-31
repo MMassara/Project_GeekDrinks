@@ -27,7 +27,7 @@ export default function LoginForm() {
   }, [email, password]);
 
   const loginApi = async () => {
-    const data = await api.post(
+    const { data } = await api.post(
       'http://localhost:3001/login',
       { email,
         password,
