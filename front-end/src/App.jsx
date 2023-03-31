@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
+import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';
@@ -15,6 +16,7 @@ export default function App() {
         <Route exact path="/login" component={ Login } />
         <Route exact path="/customer/products" component={ Products } />
         <Route exact path="/register" component={ Register } />
+        <Route exact path="/customer/checkout" component={ Cart } />
       </Switch>
     </div>
   );
