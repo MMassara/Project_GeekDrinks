@@ -48,8 +48,8 @@ export default function LoginForm() {
   // FUNCTION DEPENDS BACKEND (data)
   async function loginManager() {
     try {
-      setBadLogin(false);
       const { data } = await loginApi({ email, password });
+      console.log(data);
 
       localStorage.setItem('user', JSON.stringify({
         // SAVE ALL USER DATA
@@ -73,8 +73,12 @@ export default function LoginForm() {
         history.push('/login');
       }
     } catch (error) {
+      console.log(error);
+      const { data } = error.response;
+      console.log(data);
       setBadLogin(true);
-      setErrorMessage(error);
+
+      setErrorMessage(data.message);
     }
   }
 

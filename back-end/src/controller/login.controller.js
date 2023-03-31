@@ -6,7 +6,7 @@ const login = async (req, res) => {
   const result = await loginService.login(body);
  
   if (result === null) {
-    return res.status(401).json({ message: 'Invalid email or password' });
+    return res.status(404).json({ message: 'Not found' });
   }
 
   res.status(200).json(result);
