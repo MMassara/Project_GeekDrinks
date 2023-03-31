@@ -73,9 +73,7 @@ export default function LoginForm() {
         history.push('/login');
       }
     } catch (error) {
-      console.log(error);
       const { data } = error.response;
-      console.log(data);
       setBadLogin(true);
 
       setErrorMessage(data.message);

@@ -18,7 +18,7 @@ function NavBar() {
         </Link>
         <Link to="/">
           <div>
-            <p>Logout</p>
+            <p data-testid={ dataTestsIds[14] }>Logout</p>
           </div>
         </Link>
       </nav>
