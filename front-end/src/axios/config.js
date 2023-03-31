@@ -6,11 +6,11 @@ export const setToken = (token) => {
   api.defaults.headers.common.Authorization = token;
 };
 
-export async function loginApi(body) {
-  const res = await api.post('/login', body);
+// export async function loginApi(body) {
+//   const res = await api.post('/login', body);
 
-  return res;
-}
+//   return res;
+// }
 
 // const api = axios.post('http://localhost:3001/register', {
 //   "name": "Honda Cb 600f",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import loginApi from '../axios/config';
+import api from '../axios/config';
 
 export default function LoginForm() {
   const [email, setEmail] = useState('');
@@ -26,17 +26,22 @@ export default function LoginForm() {
     }
   }, [email, password]);
 
-  // const login = async () => {
-  //   const data = await api.post('http://localhost:3001/login', { email, password });
+  // const loginApi = async () => {
+  //   const data = await api.post('http://localhost:3001/login', { email, password, id, role, token });
   //   console.log(data);
   // };
+
+  async function loginApi(body) {
+    const res = await api.post('/login', body);
+
+    return res;
+  }
 
   // FUNCTION DEPENDS BACKEND (data)
   async function loginManager() {
     try {
       setBadLogin(false);
       const { data } = await loginApi({ email, password, id, role, token });
-      // console.log(data);
 
       localStorage.setItem('user', JSON.stringify({
         // SAVE ALL USER DATA
