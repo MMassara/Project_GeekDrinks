@@ -53,7 +53,6 @@ export default function LoginForm() {
 
       localStorage.setItem('user', JSON.stringify({
         // SAVE ALL USER DATA
-        id: data.id,
         name: data.name,
         email: data.email,
         role: data.role,

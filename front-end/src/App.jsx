@@ -1,6 +1,5 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import './App.css';
 import Login from './pages/Login';
 import Products from './pages/Products';
 import Register from './pages/Register';

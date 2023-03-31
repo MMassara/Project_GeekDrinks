@@ -12,10 +12,12 @@ const login = async (body) => {
     return result;
   }
 
-  const { role } = result;
+  const { role, name } = result;
   const token = generateToken(body);
 
   const roleObj = {
+    name,
+    email,
     role,
     token,
   };
