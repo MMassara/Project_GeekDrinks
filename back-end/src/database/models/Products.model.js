@@ -10,6 +10,8 @@ module.exports = (sequelize, DataTypes) => {
   }, { 
     tableName: 'products',
     timestamps: false,
+    underscored: true,
+    modelName: 'Product',
   });
   Product.associate = ({ SalesProduct }) => {
     Product.hasMany(SalesProduct, {
