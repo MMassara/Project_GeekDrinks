@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
-import { useParams } from 'react-router-dom';
 
 function OrderSellerDetails() {
   const mockDetails = [{
@@ -14,7 +13,6 @@ function OrderSellerDetails() {
   }];
 
   return (
-    
     <>
       <div className="container-product">
         <header>
@@ -23,7 +21,6 @@ function OrderSellerDetails() {
       </div>
       <main>
         {
-          
           mockDetails.map((order) => (
             <section key={ order.id }>
               <div data-testid={ `${dataTestsIds[54]}` }>

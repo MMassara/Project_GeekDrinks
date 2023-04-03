@@ -10,19 +10,19 @@ function SellerOrder() {
     status: 'Pendente',
     date: '08/04/21',
     price: 23.80,
-    address: 'Rua Aemon'
+    address: 'Rua Aemon',
   }, {
     id: 2,
     status: 'Preparando',
     date: '08/04/21',
     price: 14.20,
-    address: 'Rua Daenerys'
+    address: 'Rua Daenerys',
   }, {
     id: 3,
     status: 'Entregue',
     date: '07/04/21',
     price: 28.46,
-    address: 'Rua jão das neves'
+    address: 'Rua jão das neves',
   }];
   return (
     <>
