@@ -10,7 +10,6 @@ const createSale = async (req, res) => {
 
 const get = async (_req, res) => {
     const sales = await saleService.get();
-    console.log(sales);
 
     res.status(200).json(sales);
 };

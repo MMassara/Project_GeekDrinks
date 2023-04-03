@@ -1,26 +1,32 @@
-const { Sale } = require('../database/models');
+const Sequelize = require('sequelize');
+const config = require('../database/config/config');
+const { Sale, SalesProduct } = require('../database/models');
+
+const env = 'development';
+const sequelize = new Sequelize(config[env]);
 
 const createSale = async (body) => {
-    const {
-        userId,
-        totalPrice,
-        deliveryAddress,
-        deliveryNumber,
-    } = body;
+    const t = await sequelize.transaction();
+    try {
     const sellerId = 2;
-    const newSale = await Sale.create({ 
-        userId,
+    const { dataValues } = await Sale.create({ userId: body.userId, 
         sellerId,
-        totalPrice,
-        deliveryAddress,
-        deliveryNumber,
-    });
-
-    return newSale;
+        totalPrice: body.totalPrice,
+        deliveryAddress: body.deliveryAddress,
+        deliveryNumber: body.deliveryNumber }, { transaction: t });
+    Promise.all(body.products.map((product) => SalesProduct
+    .create({ quantity: product.quantity, saleId: dataValues.id, productId: product.productId })));
+    await t.commit();
+    return dataValues.id;
+    } catch (err) {
+        await t.rollback();
+        console.log(err);
+        throw err;
+    }
 };
 
-const get = async () => {
-    const result = await Sale.findAll();
+const get = async (userId) => {
+    const result = await Sale.findAll({ where: userId });
 
     return result;
 };
