@@ -1,9 +1,5 @@
-'use strict';
-
-const sequelize = require("sequelize");
-
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     await queryInterface.createTable('sales', {
       id: {
         allowNull: false,
@@ -31,16 +27,19 @@ module.exports = {
         onDelete: 'CASCADE',
       },
 
-      total_price: { allowNull: false, type: Sequelize.DECIMAL(9,2) },
-      delivery_address: { allowNull: false, type: Sequelize.STRING, unique: true },
+      total_price: { allowNull: false, type: Sequelize.DECIMAL(9, 2) },
+      delivery_address: { allowNull: false, type: Sequelize.STRING },
       delivery_number: { allowNull: false, type: Sequelize.STRING },
-      sale_date: { allowNull: false, type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP()') } ,
+      sale_date: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
       status: { allowNull: false, type: Sequelize.STRING },
  
     });
   },
 
-  async down (queryInterface, _Sequelize) {
+  async down(queryInterface, _Sequelize) {
      await queryInterface.dropTable('sales');
-  }
+  },
 };
