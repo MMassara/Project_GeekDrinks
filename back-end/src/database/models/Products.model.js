@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     name: DataTypes.STRING,
-    price: DataTypes.DECIMAL(4,2),
+    price: DataTypes.DECIMAL(4, 2),
     urlImage: DataTypes.STRING,
   }, { 
     tableName: 'products',
@@ -14,10 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Product',
   });
   Product.associate = ({ SalesProduct }) => {
-    Product.hasMany(SalesProduct, {
-      foreignKey: 'productId', as: 'products',
-    })
+    Product.hasMany(SalesProduct, { foreignKey: 'productId', as: 'products' });
   };
   return Product;
 };
-

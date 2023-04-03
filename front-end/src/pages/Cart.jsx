@@ -25,25 +25,7 @@ export default function Cart() {
   const [sallesApi, setSallesApi] = useState({});
 
   useEffect(() => {
-    // setProducts(JSON.parse(localStorage.getItem('products')));
-    setProducts([
-      {
-        id: 1,
-        name: 'Skol Lata 250ml',
-        price: 2.2,
-        quantity: 12,
-      },
-      {
-        id: 2,
-        name: 'Heineken 600ml',
-        price: 7.5,
-        quantity: 12,
-      }, {
-        id: 3,
-        name: 'Antarctica Pilsen 300ml',
-        price: 2.49,
-        quantity: 12,
-      }]);
+    setProducts(JSON.parse(localStorage.getItem('products')));
     const getSellers = () => {
       setSellers([{ name: 'Fulana Pereira', id: 2 }]);
     };
@@ -75,9 +57,11 @@ export default function Cart() {
     event.preventDefault();
     const { token } = JSON.parse(localStorage.getItem('user'));
     setToken(token);
-    console.log(newSale);
     const data = await api.post('/sales', newSale);
-    setSallesApi(data);
+    console.log(data);
+    // colocar o id da venda que deve ser retornado pela API /sales
+    // revisar relacoes do banco de dados
+    setSallesApi(2);
     setIsFinish(true);
   };
 
