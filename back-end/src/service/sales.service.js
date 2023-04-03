@@ -14,6 +14,7 @@ const createSale = async (body) => {
         totalPrice,
         deliveryAddress,
         deliveryNumber,
+
     }); 
 
     return dataValues.id;

@@ -57,11 +57,10 @@ export default function Cart() {
     event.preventDefault();
     const { token } = JSON.parse(localStorage.getItem('user'));
     setToken(token);
-    const data = await api.post('/sales', newSale);
+    const { saleId } = await api.post('/sales', newSale);
     console.log(data);
     // colocar o id da venda que deve ser retornado pela API /sales
-    // revisar relacoes do banco de dados
-    setSallesApi(2);
+    setSallesApi(saleId);
     setIsFinish(true);
   };
 
