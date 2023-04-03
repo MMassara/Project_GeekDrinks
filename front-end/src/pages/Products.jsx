@@ -8,12 +8,13 @@ function Products() {
   const [products, setProducts] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
   const history = useHistory();
+  const token = JSON.parse(localStorage.getItem('user'));
 
   useEffect(() => {
-    axios.get('http://localhost:3001/products').then(({ data }) => {
+    axios.get('http://localhost:3001/products', { headers: { Authorization: token.token } }).then(({ data }) => {
       setProducts(data.map((allData) => ({ ...allData, quantity: 0 })));
     });
-  }, []);
+  });
 
   useEffect(() => {
     function setProductsOnLocalStorage() {

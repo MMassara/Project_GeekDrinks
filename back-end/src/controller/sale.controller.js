@@ -1,4 +1,5 @@
 const { saleService } = require('../service');
+const { decodeToken } = require('../utils/jwtGenerator');
 
 const createSale = async (req, res) => {
     const { body } = req;
@@ -8,8 +9,10 @@ const createSale = async (req, res) => {
     res.status(201).json(create);
 };
 
-const get = async (_req, res) => {
-    const sales = await saleService.get();
+const get = async (req, res) => {
+    const { Authorization } = req.headers;
+    const { id } = decodeToken(Authorization);
+    const sales = await saleService.get(id);
 
     res.status(200).json(sales);
 };

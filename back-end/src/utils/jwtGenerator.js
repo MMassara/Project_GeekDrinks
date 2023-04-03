@@ -8,6 +8,10 @@ const generateToken = (payload) =>
     algorithm: 'HS256',
   });
 
+  const decodeToken = (payload) =>
+  jwt.decode(payload, JWT_SECRET);
+
 module.exports = {
   generateToken,
+  decodeToken,
 };

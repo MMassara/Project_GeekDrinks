@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
@@ -21,6 +22,17 @@ function CustomerOrder() {
     date: '07/04/21',
     price: 28.46,
   }];
+  const [orders, setOrders] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/sales').then(({ data }) => {
+      console.log(data);
+      setOrders(data.map((allData) => (allData)));
+    });
+  });
+
+  console.log(orders);
+
   return (
     <>
       <div className="container-product">
