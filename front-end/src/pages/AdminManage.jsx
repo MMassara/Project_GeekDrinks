@@ -7,12 +7,11 @@ function AdminManage() {
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
 
-  const handleChangeRole = ({ target: { value } }) =>  setRole(value);
-  const handleChangeName = ({ target: { value } }) =>  setName(value);
-  const handleChangeEmail = ({ target: { value } }) =>  setEmail(value);
-  const handleChangePassword = ({ target: { value } }) =>  setPassword(value);
- 
-  console.log(role)
+  const handleChangeRole = ({ target: { value } }) => setRole(value);
+  const handleChangeName = ({ target: { value } }) => setName(value);
+  const handleChangeEmail = ({ target: { value } }) => setEmail(value);
+  const handleChangePassword = ({ target: { value } }) => setPassword(value);
+
   return (
     <section>
       <section>
@@ -44,7 +43,7 @@ function AdminManage() {
             value={ password }
             data-testid={ dataTestsIds[67] }
           />
-          <select 
+          <select
             onChange={ handleChangeRole }
             name="role"
             data-testid={ dataTestsIds[69] }
