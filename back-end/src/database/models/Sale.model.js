@@ -18,11 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     deliveryNumber: DataTypes.STRING,
     saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
     status: { type: DataTypes.STRING, defaultValue: 'pendente' },
-  }, {
-    timestamp: false,
+  }, { 
     underscored: true,
     tableName: 'sales',
-    modelName: 'Sale',
+    timestamps: false,
   });
 
   Sale.associate = ({ User, SalesProduct}) => {

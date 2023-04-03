@@ -5,18 +5,17 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true,
     },
     name: DataTypes.STRING,
-    price: DataTypes.DECIMAL(4,2),
-    url_image: DataTypes.STRING,
+    price: DataTypes.DECIMAL(4, 2),
+    urlImage: DataTypes.STRING,
   }, { 
     underscored: true,
     tableName: 'products',
     timestamps: false,
+    underscored: true,
+    modelName: 'Product',
   });
   Product.associate = ({ SalesProduct }) => {
-    Product.hasMany(SalesProduct, {
-      foreignKey: 'productId', as: 'products',
-    })
+    Product.hasMany(SalesProduct, { foreignKey: 'productId', as: 'products' });
   };
   return Product;
 };
-

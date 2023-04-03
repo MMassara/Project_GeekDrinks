@@ -1,29 +1,60 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
 
-const mockProducts = [
-  {
-    id: 1,
-    name: 'Skol Lata 250ml',
-    price: 2.20,
-    url_image: 'https://storage.deliveryvip.com.br/hZG6TM1Z8-CJw6PcUePMgUGkatlSRUcPSeOk1obJieg/h:256/Z3M6Ly9kZWxpdmVy/eXZpcC8zN204cnJt/a2dlY2duM3NvaG55/cjlncXIxYnp3',
-  },
-  {
-    id: 2,
-    name: 'Heineken 600ml',
-    price: 7.50,
-    url_image: 'https://www.cidadecancao.com/media/catalog/product/C/e/Cerveja_Heineken_600ml_0000078905498.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=310&width=310&canvas=310:310',
-  },
-  {
-    id: 3,
-    name: 'Antarctica Pilsen 300ml',
-    price: 2.49,
-    url_image: 'https://www.amigao.com/media/catalog/product/C/e/Cerveja_Brahma_Pilsen_Retornavel_300ml_0000020157227_3.jpg?optimize=high&bg-color=255,255,255&fit=bounds&height=310&width=310&canvas=310:310',
-  },
-];
-
 function Products() {
+  const [products, setProducts] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
+  const history = useHistory();
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/products').then(({ data }) => {
+      setProducts(data.map((allData) => ({ ...allData, quantity: 0 })));
+    });
+  }, []);
+
+  useEffect(() => {
+    function setProductsOnLocalStorage() {
+      const filteredProducts = products.filter(({ quantity }) => quantity > 0);
+      localStorage.setItem('products', JSON.stringify(filteredProducts));
+      setIsDisabled(!products.some(({ quantity }) => quantity > 0));
+    }
+    setProductsOnLocalStorage();
+  }, [products]);
+
+  const handleChange = (id, value) => {
+    setProducts((prevProducts) => prevProducts.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: value };
+      }
+      return product;
+    }));
+  };
+
+  const increment = (id) => {
+    setProducts((prevProducts) => prevProducts.map((product) => {
+      if (product.id === id) {
+        return { ...product, quantity: product.quantity + 1 };
+      }
+      return product;
+    }));
+  };
+
+  const decrement = (id) => {
+    setProducts((prevProducts) => prevProducts.map((product) => {
+      if (product.id === id && product.quantity > 0) {
+        return { ...product, quantity: product.quantity - 1 };
+      }
+      return product;
+    }));
+  };
+
+  const calcProducts = () => products.map(({ quantity, price }) => (
+    Number(quantity) * Number(price)
+  )).reduce((acc, curr) => acc + curr, 0);
+
   return (
     <div className="container-product">
       <header>
@@ -31,41 +62,50 @@ function Products() {
       </header>
       <main>
         {
-          mockProducts.map((product) => (
-            <section key={ product.name }>
+          products?.map((product, index) => (
+            <section key={ index }>
+              <figure className="imgCard">
+                <img
+                  data-testid={ `${dataTestsIds[17]}${product.id}` }
+                  src={ product.urlImage }
+                  alt={ product.name }
+                  style={ { height: '100px',
+                    width: '100px' } }
+                />
+                <p data-testid={ `${dataTestsIds[16]}${product.id}` }>
+                  { `R$ ${product.price.replace('.', ',')}` }
+                </p>
+              </figure>
               <div>
                 <p data-testid={ `${dataTestsIds[15]}${product.id}` }>
                   { product.name }
                 </p>
               </div>
 
-              <div>
-                <p data-testid={ `${dataTestsIds[16]}${product.id}` }>
-                  { product.price }
-                </p>
-              </div>
-
-              <div>
-                <img
-                  data-testid={ `${dataTestsIds[17]}${product.id}` }
-                  src={ product.url_image }
-                  alt={ product.name }
-                />
-              </div>
-
               <div className="product-quantity">
                 <button
                   type="button"
                   data-testid={ `${dataTestsIds[19]}${product.id}` }
+                  onClick={ () => decrement(product.id) }
                 >
                   -
                 </button>
 
-                <input data-testid={ `${dataTestsIds[20]}${product.id}` } type="number" />
+                <input
+                  data-testid={ `${dataTestsIds[20]}${product.id}` }
+                  type="number"
+                  name={ `input${index}` }
+                  value={ product.quantity }
+                  min="0"
+                  onChange={
+                    ({ target: { value } }) => handleChange(product.id, Number(value))
+                  }
+                />
 
                 <button
                   type="button"
                   data-testid={ `${dataTestsIds[18]}${product.id}` }
+                  onClick={ () => increment(product.id) }
                 >
                   +
                 </button>
@@ -74,6 +114,19 @@ function Products() {
             </section>
           ))
         }
+        <button
+          type="button"
+          data-testid={ `${dataTestsIds[21]}` }
+          onClick={ () => history.push('/customer/checkout') }
+          disabled={ isDisabled }
+          className="cartBtn"
+        >
+          VER CARRINHO: R$
+          {' '}
+          <span data-testid={ `${dataTestsIds[22]}` }>
+            {calcProducts().toFixed(2).replace('.', ',')}
+          </span>
+        </button>
       </main>
     </div>
   );
