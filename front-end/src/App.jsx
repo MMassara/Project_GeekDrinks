@@ -6,6 +6,8 @@ import Login from './pages/Login';
 import OrderDetails from './pages/OrderDetails';
 import Products from './pages/Products';
 import Register from './pages/Register';
+import OrderSellerDetails from './pages/OrderSellerDetails';
+import SellerOrder from './pages/SellerOrder';
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
         <Route exact path="/customer/checkout" component={ Cart } />
         <Route exact path="/customer/orders" component={ CustomerOrder } />
         <Route exact path="/customer/orders/:id" component={ OrderDetails } />
+        <Route exact path="/seller/orders" component={ SellerOrder } />
+        <Route exact path="/seller/orders/:id" component={ OrderSellerDetails } />
       </Switch>
     </div>
   );
