@@ -8,15 +8,16 @@ const createSale = async (body) => {
         deliveryNumber,
     } = body;
     const sellerId = 2;
-    const newSale = await Sale.create({ 
+    const { dataValues } = await Sale.create({ 
         userId,
         sellerId,
         totalPrice,
         deliveryAddress,
         deliveryNumber,
-    });
 
-    return newSale;
+    }); 
+
+    return dataValues.id;
 };
 
 const get = async () => {
