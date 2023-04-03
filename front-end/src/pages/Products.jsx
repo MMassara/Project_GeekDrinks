@@ -36,8 +36,10 @@ function Products() {
               <div>
                 <img
                   data-testid={ `${dataTestsIds[17]}${product.id}` }
-                  src={ product.url_image }
+                  src={ product.urlImage }
                   alt={ product.name }
+                  style={ { height: '100px',
+                    width: '100px' } }
                 />
               </div>
 
