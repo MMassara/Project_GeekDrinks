@@ -8,6 +8,13 @@ const generateToken = (payload) =>
     algorithm: 'HS256',
   });
 
+const tokenValidation = (token) => {
+  const validate = jwt.verify(token, JWT_SECRET);
+  
+  return validate;
+};
+
 module.exports = {
   generateToken,
+  tokenValidation,
 };
