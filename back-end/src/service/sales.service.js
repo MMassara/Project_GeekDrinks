@@ -1,19 +1,11 @@
 const { Sale, SalesProduct } = require('../database/models');
 
-const createSale = async ({
-  userId,
-  totalPrice,
-  deliveryAddress,
-  deliveryNumber,
+const createSale = async ({ userId, totalPrice, deliveryAddress, deliveryNumber,
   products,
 }) => {
   const sellerId = 2;
-  const { dataValues } = await Sale.create({
-    userId,
-    sellerId,
-    totalPrice,
-    deliveryAddress,
-    deliveryNumber,
+  const { dataValues } = await Sale.create({ 
+  userId, sellerId, totalPrice, deliveryAddress, deliveryNumber,
   });
   await Promise.all(
     products.map(async ({ productId, quantity }) => {
