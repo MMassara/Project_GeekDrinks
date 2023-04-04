@@ -38,8 +38,7 @@ export default function Cart() {
         setNewSale((prevState) => ({
           ...prevState,
           totalPrice: Number(calcTotalPrice(products).replace(',', '.')),
-          // userId: JSON.parse(localStorage.getItem('userId')),
-          userId: 3,
+          userId: JSON.parse(localStorage.getItem('userId')),
           products: products.map(({ id, quantity }) => ({ productId: id, quantity })),
         }));
       }
@@ -58,7 +57,7 @@ export default function Cart() {
     const { token } = JSON.parse(localStorage.getItem('user'));
     setToken(token);
     const { data } = await api.post('/sales', newSale);
-    // console.log(data);
+
     // colocar o id da venda que deve ser retornado pela API /sales
     setSallesApi(data.saleId);
     setIsFinish(true);

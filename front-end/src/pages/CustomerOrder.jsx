@@ -1,26 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
 
 function CustomerOrder() {
+  const [orders, setOrders] = useState([]);
   const history = useHistory();
-  const mockOrders = [{
-    id: 1,
-    status: 'Pendente',
-    date: '08/04/21',
-    price: 23.80,
-  }, {
-    id: 2,
-    status: 'Preparando',
-    date: '08/04/21',
-    price: 14.20,
-  }, {
-    id: 3,
-    status: 'Entregue',
-    date: '07/04/21',
-    price: 28.46,
-  }];
+  const ten = 10;
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('user'));
+    axios.get('http://localhost:3001/sales', { headers: { Authorization: token.token } }).then(({ data }) => {
+      setOrders(data);
+    }).catch((err) => console.log(err));
+  }, []);
+
   return (
     <>
       <div className="container-product">
@@ -30,7 +25,7 @@ function CustomerOrder() {
       </div>
       <main>
         {
-          mockOrders.map((order) => (
+          orders?.map((order) => (
             <card
               key={ order.id }
               onClick={
@@ -44,10 +39,10 @@ function CustomerOrder() {
                 { order.status }
               </div>
               <div data-testid={ `${dataTestsIds[36]}${order.id}` }>
-                { order.date }
+                { order.saleDate.slice(0, ten) }
               </div>
               <div data-testid={ `${dataTestsIds[37]}${order.id}` }>
-                {`R$ ${order.price}`}
+                {`R$ ${order.totalPrice}`}
               </div>
             </card>
           ))

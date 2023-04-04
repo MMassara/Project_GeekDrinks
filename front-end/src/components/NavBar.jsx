@@ -17,7 +17,7 @@ function NavBar() {
           </div>
         </Link>
 
-        <Link to="/pedidos">
+        <Link to="/customer/orders">
           <div>
             <p data-testid={ dataTestsIds[12] }>Pedidos</p>
           </div>
