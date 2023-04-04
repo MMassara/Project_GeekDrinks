@@ -28,17 +28,17 @@ const createSale = async (body) => {
 const get = async (userId) => {
     const result = await Sale.findAll({ where: { userId } });
 
-    return result;
+  return result;
 };
 
 const getById = async (id) => {
-    const result = await Sale.findOne({ where: +id });
+  const result = await Sale.findOne({ where: +id });
 
-    return result;
+  return result;
 };
 
 module.exports = {
-    createSale,
-    get,
-    getById,
+  createSale,
+  get,
+  getById,
 };

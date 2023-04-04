@@ -4,9 +4,9 @@ const { decodeToken } = require('../utils/jwtGenerator');
 const createSale = async (req, res) => {
     const { body } = req;
 
-    const create = saleService.createSale(body);
+    const saleId = await saleService.createSale(body);
 
-    res.status(201).json(create);
+    res.status(201).json({ saleId });
 };
 
 const get = async (req, res) => {
