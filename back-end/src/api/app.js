@@ -12,6 +12,7 @@ app.use(routes.loginRouter);
 app.use(routes.registerRouter);
 app.use(routes.productRouter);
 app.use(routes.saleRouter);
+app.use(routes.orderRouter);
 app.use(routes.admRouter);
 app.get('/coffee', (_req, res) => res.status(418).end());
 
