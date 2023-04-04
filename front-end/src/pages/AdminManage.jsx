@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dataTestsIds from '../utils/dataTestIds';
 
 function AdminManage() {
@@ -6,11 +6,28 @@ function AdminManage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+  const [disableLoginButton, setDisableLoginButton] = useState(true);
 
   const handleChangeRole = ({ target: { value } }) => setRole(value);
   const handleChangeName = ({ target: { value } }) => setName(value);
   const handleChangeEmail = ({ target: { value } }) => setEmail(value);
   const handleChangePassword = ({ target: { value } }) => setPassword(value);
+
+  // CREATE VALIDATIONS FOR EMAIL, PASSWORD, NAME AND ROLE
+  useEffect(() => {
+    const PASSWORD_LENGTH = 6;
+    const NAME_LENGTH = 12;
+    const validEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
+    const validPassword = (password.length >= PASSWORD_LENGTH);
+    const validName = (name.length >= NAME_LENGTH);
+
+    // IF VALID, ABLE TO PASS - IF NOT, CONTINUE DISABLED --- BUTTON
+    if (validEmail && validPassword && validName && role !== '') {
+      setDisableLoginButton(false);
+    } else {
+      setDisableLoginButton(true);
+    }
+  }, [email, password, name, role]);
 
   return (
     <section>
@@ -24,6 +41,7 @@ function AdminManage() {
             onChange={ handleChangeName }
             value={ name }
             data-testid={ dataTestsIds[65] }
+            required
           />
           <input
             className="inputAdminManage"
@@ -48,8 +66,9 @@ function AdminManage() {
             name="role"
             data-testid={ dataTestsIds[69] }
             value={ role }
+            required
           >
-            <option value="">Please choose a role</option>
+            <option selected value="">Please choose a role</option>
             <option value="customer">Customer</option>
             <option value="seller">Seller</option>
           </select>
@@ -57,6 +76,7 @@ function AdminManage() {
             type="submit"
             className="registerBtn"
             data-testid={ dataTestsIds[68] }
+            disabled={ disableLoginButton }
           >
             CADASTRAR
           </button>
