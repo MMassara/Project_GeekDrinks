@@ -26,7 +26,7 @@ const createSale = async (body) => {
 };
 
 const get = async (userId) => {
-    const result = await Sale.findAll({ where: userId });
+    const result = await Sale.findAll({ where: { userId } });
 
     return result;
 };

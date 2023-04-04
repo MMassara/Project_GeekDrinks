@@ -16,7 +16,7 @@ const create = async (req, res) => {
 
     const token = jwt.sign(payload, JWT_SECRET);
 
-    return res.status(201).json({ token });
+    return res.status(201).json({ token, id });
     } catch (err) {
         res.status(409).json({ message: err.message }); 
     }

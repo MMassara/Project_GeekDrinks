@@ -10,8 +10,8 @@ const createSale = async (req, res) => {
 };
 
 const get = async (req, res) => {
-    const { Authorization } = req.headers;
-    const { id } = decodeToken(Authorization);
+    const { authorization } = req.headers;
+    const { id } = decodeToken(authorization);
     const sales = await saleService.get(id);
 
     res.status(200).json(sales);
