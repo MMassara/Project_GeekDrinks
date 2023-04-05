@@ -12,13 +12,14 @@ export default function OrderDetails() {
   useEffect(() => {
     axios.get(`http://localhost:3001/customer/orders/${id}`).then(({ data }) => {
       setSalles(data);
-      // console.log('axios status data', data.status);
+      console.log('axios status data', data);
       setStatus(data.status);
     });
   }, [id]);
   const DATE_SLICE = 10;
+
   const changeStatusInDB = async (value) => {
-    await api.put(`/seller/orders/${id}`, { status: value });
+    await axios.put(`http://localhost:3001/customer/orders/${id}`, { status: value });
   };
 
   const handleStatus = ({ target: { value } }) => {
