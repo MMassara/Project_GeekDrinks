@@ -28,7 +28,7 @@ export default function LoginForm() {
     } else {
       setDisableLoginButton(true);
     }
-  }, [email, password]);
+  }, [email, password, history]);
 
   // const loginApi = async () => {
   //   const { data } = await api.post(
