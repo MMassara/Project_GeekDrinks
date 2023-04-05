@@ -44,9 +44,6 @@ export default function OrderDetails() {
           <div data-testid={ `${dataTestsIds[40]}` }>
             {sales.saleDate?.slice(0, DATE_SLICE)}
           </div>
-          <div data-testid={ `${dataTestsIds[41]}` }>
-            {sales.status}
-          </div>
           <TableOrders
             sales={ sales }
             status={ status }

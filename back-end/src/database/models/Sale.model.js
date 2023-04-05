@@ -7,33 +7,33 @@ module.exports = (sequelize, DataTypes) => {
     },
     userId: { 
       type: DataTypes.INTEGER,
-      foreignKey: true
+      foreignKey: true,
     },
     sellerId: { 
       type: DataTypes.INTEGER,
-      foreignKey: true
+      foreignKey: true,
     },
     totalPrice: DataTypes.DECIMAL(9, 2),
     deliveryAddress: DataTypes.STRING,
     deliveryNumber: DataTypes.STRING,
     saleDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
-    status: { type: DataTypes.STRING, defaultValue: 'pendente' },
+    status: { type: DataTypes.STRING, defaultValue: 'Pendente' },
   }, { 
     underscored: true,
     tableName: 'sales',
     timestamps: false,
   });
 
-  Sale.associate = ({ User, SalesProduct}) => {
+  Sale.associate = ({ User, SalesProduct }) => {
     Sale.belongsTo(User, {
       foreignKey: 'userId',
       foreignKey: 'sellerId',
-      as: 'users'
-    })
+      as: 'users',
+    });
     Sale.hasMany(SalesProduct, {
       foreignKey: 'saleId', as: 'sales',
-    })
-  }
+    });
+  };
  
   return Sale;
 };
