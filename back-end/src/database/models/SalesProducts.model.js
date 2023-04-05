@@ -13,12 +13,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       primaryKey: true,
     },
-  }, { 
+  },
+
+{ 
     underscored: true,
-    tableName: 'salesProducts',
+    tableName: 'sales_products',
     timestamps: false,
-    modelName: 'SalesProduct',
-  });
+  },
+);
   SalesProduct.associate = ({ Sale, Product }) => {
     Sale.belongsToMany(Sale, {
       foreignKey: 'saleId',

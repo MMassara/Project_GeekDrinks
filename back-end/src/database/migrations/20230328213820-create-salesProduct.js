@@ -1,8 +1,7 @@
-'use strict';
-
 module.exports = {
-  async up (queryInterface, Sequelize) {
-     await queryInterface.createTable('salesProducts', 
+  async up(queryInterface, Sequelize) {
+     await queryInterface.createTable(
+'sales_products', 
      { 
       quantity: { 
         type: Sequelize.INTEGER,
@@ -26,10 +25,11 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },
-     });
+     },
+);
   },
 
-  async down (queryInterface, _Sequelize) {
-     await queryInterface.dropTable('salesProducts');
-  }
+  async down(queryInterface, _Sequelize) {
+     await queryInterface.dropTable('sales_products');
+  },
 };
