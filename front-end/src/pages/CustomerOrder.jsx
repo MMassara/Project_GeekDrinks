@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
@@ -39,10 +39,10 @@ function CustomerOrder() {
                 { order.status }
               </div>
               <div data-testid={ `${dataTestsIds[36]}${order.id}` }>
-                { order.saleDate.slice(0, ten) }
+                { order.saleDate.slice(0, ten).split('-').reverse().join('/') }
               </div>
               <div data-testid={ `${dataTestsIds[37]}${order.id}` }>
-                {`R$ ${order.totalPrice}`}
+                {`${order.totalPrice.replace(/\./, ',')}`}
               </div>
             </card>
           ))

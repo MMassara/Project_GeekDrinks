@@ -16,6 +16,7 @@ const login = async (body) => {
   const token = generateToken({ email, id });
 
   const roleObj = {
+    id,
     name,
     email,
     role,

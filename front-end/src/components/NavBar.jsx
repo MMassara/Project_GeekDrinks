@@ -4,6 +4,8 @@ import dataTestsIds from '../utils/dataTestIds';
 function NavBar() {
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('products');
   };
 
   const storage = JSON.parse(localStorage.getItem('user')) || { name: 'usuário' };
