@@ -50,14 +50,15 @@ export default function LoginForm() {
     try {
       const { data } = await loginApi({ email, password });
       console.log(data);
-
       localStorage.setItem('user', JSON.stringify({
         // SAVE ALL USER DATA
+        // userId: data.id,
         name: data.name,
         email: data.email,
         role: data.role,
         token: data.token,
       }));
+      localStorage.setItem('userId', JSON.stringify(data.id));
       switch (data.role) {
       case 'customer':
         history.push('/customer/products');
