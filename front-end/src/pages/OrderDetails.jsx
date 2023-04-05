@@ -39,7 +39,7 @@ export default function OrderDetails() {
             {`Pedido ${sales.id}`}
           </div>
           <div data-testid={ `${dataTestsIds[39]}` }>
-            {`Vendedor: ${sales.sellerId}`}
+            <p>Fulana Pereira</p>
           </div>
           <div data-testid={ `${dataTestsIds[40]}` }>
             {sales.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}
