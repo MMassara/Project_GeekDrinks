@@ -7,14 +7,24 @@ import dataTestsIds from '../utils/dataTestIds';
 
 export default function OrderDetails() {
   const [sales, setSalles] = useState({});
+  const [status, setStatus] = useState('');
   const { id } = useParams();
   useEffect(() => {
     axios.get(`http://localhost:3001/customer/orders/${id}`).then(({ data }) => {
       setSalles(data);
-      console.log('axios data', data);
+      // console.log('axios status data', data.status);
+      setStatus(data.status);
     });
   }, [id]);
   const DATE_SLICE = 10;
+  const changeStatusInDB = async (value) => {
+    await api.put(`/seller/orders/${id}`, { status: value });
+  };
+
+  const handleStatus = ({ target: { value } }) => {
+    setStatus(value);
+    changeStatusInDB(value);
+  };
   return (
     <>
       <div className="container-product">
@@ -36,13 +46,11 @@ export default function OrderDetails() {
           <div data-testid={ `${dataTestsIds[41]}` }>
             {sales.status}
           </div>
-          <button
-            type="button"
-            data-testid={ `${dataTestsIds[48]}` }
-          >
-            Marcar como entregue
-          </button>
-          <TableOrders sales={ sales } />
+          <TableOrders
+            sales={ sales }
+            status={ status }
+            handleStatus={ handleStatus }
+          />
           <div data-testid={ `${dataTestsIds[47]}` }>
             {`Total: ${sales.totalPrice}`}
           </div>

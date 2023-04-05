@@ -12,4 +12,9 @@ const findSalesById = async (saleId) => {
   return { status: 200, message: { items: products, ...dataValues } };
 };
 
-module.exports = { findSalesById };
+async function changeStatus({ status, id }) {
+  const updated = await Sale.update({ status }, { where: { id } });
+  return updated;
+}
+
+module.exports = { findSalesById, changeStatus };
