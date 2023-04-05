@@ -42,7 +42,7 @@ export default function OrderDetails() {
             {`Vendedor: ${sales.sellerId}`}
           </div>
           <div data-testid={ `${dataTestsIds[40]}` }>
-            {sales.saleDate?.slice(0, DATE_SLICE)}
+            {sales.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}
           </div>
           <TableOrders
             sales={ sales }
@@ -50,7 +50,7 @@ export default function OrderDetails() {
             handleStatus={ handleStatus }
           />
           <div data-testid={ `${dataTestsIds[47]}` }>
-            {`Total: ${sales.totalPrice}`}
+            {`Total: ${sales.totalPrice?.replace(/\./, ',')}`}
           </div>
         </section>
       </main>

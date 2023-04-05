@@ -14,6 +14,10 @@ export default function LoginForm() {
 
   // CREATE VALIDATIONS FOR EMAIL AND PASSWORD
   useEffect(() => {
+    const userLogged = !!localStorage.getItem('user');
+    if (userLogged) {
+      history.push('/customer/products');
+    }
     const PASSWORD_LENGTH = 6;
     const validEmail = /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(email);
     const validPassword = (password.length >= PASSWORD_LENGTH);
