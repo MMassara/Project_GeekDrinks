@@ -15,7 +15,7 @@ export default function OrderDetails() {
       console.log('axios status data', data);
       setStatus(data.status);
     });
-  }, [id]);
+  }, [id, status]);
   const DATE_SLICE = 10;
 
   const changeStatusInDB = async (value) => {

@@ -1,7 +1,15 @@
 import propTypes from 'prop-types';
 import dataTestsIds from '../utils/dataTestIds';
 
-export default function TableOrders({ sales: { items }, status, handleStatus }) {
+export default function SellerTableOrders({ order: { items } }) {
+
+  const totalPrice = (price, quant) => {
+    const total = price * quant;
+    const totalString = `${total.toFixed(2)}`
+    console.log(totalString)
+    return totalString.replace('.', ',')
+  }
+
   return (
     <>
       <table>
@@ -18,56 +26,40 @@ export default function TableOrders({ sales: { items }, status, handleStatus }) 
           {items && items.map((item) => (
             <tr key={ item.id }>
               <td
-                data-testid={ `${dataTestsIds[42]}${item.id}` }
+                data-testid={ `${dataTestsIds[59]}${item.id}` }
               >
                 {item.id}
               </td>
               <td
-                data-testid={ `${dataTestsIds[43]}${item.id}` }
+                data-testid={ `${dataTestsIds[60]}${item.id}` }
                 n
               >
                 {item.name}
               </td>
               <td
-                data-testid={ `${dataTestsIds[44]}${item.id}` }
+                data-testid={ `${dataTestsIds[61]}${item.id}` }
               >
                 {item.quantity}
               </td>
               <td
-                data-testid={ `${dataTestsIds[45]}${item.id}` }
+                data-testid={ `${dataTestsIds[62]}${item.id}` }
               >
-                {item.price}
+                {item.price.replace('.', ',')}
               </td>
               <td
-                data-testid={ `${dataTestsIds[46]}${item.id}` }
+                data-testid={ `${dataTestsIds[63]}${item.id}` }
               >
-                {item.price * item.quantity}
+                {totalPrice(item.price, item.quantity)}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <p
-        data-testid={ `${dataTestsIds[41]}` }
-        className="detailsStatus"
-      >
-        { status }
-      </p>
-      <button
-        type="button"
-        data-testid={ `${dataTestsIds[48]}` }
-        disabled={ status !== 'Em Trânsito' }
-        value="Entregue"
-        onClick={ (event) => handleStatus(event) }
-        className="detailsBtn"
-      >
-        MARCAR COMO ENTREGUE
-      </button>
     </>
   );
 }
 
-TableOrders.propTypes = {
+SellerTableOrders.propTypes = {
   items: propTypes.array,
   status: propTypes.string,
   handleStatus: propTypes.func,
