@@ -5,5 +5,6 @@ const router = Router();
 
 router.get('/customer/orders/:id', orderControlller.findSalesById);
 router.put('/customer/orders/:id', orderControlller.changeStatus);
+router.put('/seller/orders/:id', orderControlller.changeStatus);
 
 module.exports = router;

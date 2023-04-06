@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const config = require('../database/config/config');
-const { Sale, SalesProduct } = require('../database/models');
+const { Sale, SalesProduct, User } = require('../database/models');
 
 const env = 'development';
 const sequelize = new Sequelize(config[env]);
@@ -26,8 +26,12 @@ const createSale = async (body) => {
 };
 
 const get = async (userId) => {
-    const result = await Sale.findAll({ where: { userId } });
-
+  const dataValues = await User.findAll({ where: { id: userId } });
+  if (dataValues[0].role === 'seller') {
+    const result = await Sale.findAll();
+    return result;
+  }
+  const result = await Sale.findAll({ where: { userId } });
   return result;
 };
 

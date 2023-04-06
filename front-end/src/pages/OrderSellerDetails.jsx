@@ -1,33 +1,56 @@
-import React from 'react';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import TableOrders from '../components/TableOrders';
 
 function OrderSellerDetails() {
-  const mockDetails = [{
-    id: 2,
-    seller: 'Fulana Pereira',
-    date: '03/04/2023',
-    status: 'Pendente',
-    items: [{ itemId: 1, name: 'Cerveja Stella 250ml', quantity: 3, price: 3.50 }],
-    totalPrice: 10.50,
-  }];
+  const [details, setDetails] = useState([]);
+  const [status, setStatus] = useState('');
+  const DATE_SLICE = 10
+  // const mockDetails = [{
+  //   id: 2,
+  //   seller: 'Fulana Pereira',
+  //   date: '03/04/2023',
+  //   status: 'Pendente',
+  //   items: [{ itemId: 1, name: 'Cerveja Stella 250ml', quantity: 3, price: 3.50 }],
+  //   totalPrice: 10.50,
+  // }];
+  const { id } = useParams();
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem('user'));
+    axios.get(`http://localhost:3001/sales`, { headers: { Authorization: token.token } }).then(({ data }) => {
+      setDetails(data);
+      console.log('details', details)
+      console.log('Id', id)
+    }).catch((err) => console.log(err));
+  }, [status]);
+
+  const changeStatusInDB = async (value) => {
+    await axios.put(`http://localhost:3001/seller/orders/${id}`, { status: value });
+    console.log(value)
+  };
+
+  const handleStatus = ({ target: { value } }) => {
+    setStatus(value);
+    changeStatusInDB(value);
+  };
 
   return (
     <>
       <div className="container-product">
-        <header>
           <NavBar />
-        </header>
       </div>
       <main>
         {
-          mockDetails.map((order) => (
+          details?.map((order) => (
             <section key={ order.id }>
               <div data-testid={ `${dataTestsIds[54]}` }>
                 {`${order.id}`}
               </div>
               <div data-testid={ `${dataTestsIds[56]}` }>
-                {order.date}
+                {order.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}
               </div>
               <div data-testid={ `${dataTestsIds[55]}` }>
                 {order.status}
@@ -35,17 +58,27 @@ function OrderSellerDetails() {
               <button
                 type="button"
                 data-testid={ `${dataTestsIds[57]}` }
+                value='Preparando'
+                onClick={ handleStatus }
+                disabled={ order.status !== 'Pendente' }
               >
                 PREPARING CHECK
               </button>
               <button
                 type="button"
                 data-testid={ `${dataTestsIds[58]}` }
-                disabled
+                value='Em trânsito'
+                onClick={ handleStatus }
+                disabled={ order.status !== 'Preparando' }
               >
                 DISPATCH CHECK
               </button>
-              <table>
+              {/* <TableOrders
+                sales={ sales }
+                status={ status }
+                handleStatus={ handleStatus }
+              /> */}
+              {/* <table>
                 <thead>
                   <tr>
                     <th>Item</th>
@@ -86,12 +119,12 @@ function OrderSellerDetails() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+              </table> */}
             </section>
           ))
         }
         <div data-testid={ `${dataTestsIds[64]}` }>
-          {`${mockDetails[0].totalPrice}`}
+          { details.totalPrice }
         </div>
       </main>
     </>
