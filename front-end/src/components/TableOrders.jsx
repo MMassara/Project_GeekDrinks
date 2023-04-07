@@ -56,7 +56,7 @@ export default function TableOrders({ sales: { items }, status, handleStatus }) 
       <button
         type="button"
         data-testid={ `${dataTestsIds[48]}` }
-        disabled={ status === 'Entregue' || status === 'Pendente' }
+        disabled={ status !== 'Em Trânsito' }
         value="Entregue"
         onClick={ (event) => handleStatus(event) }
         className="detailsBtn"
