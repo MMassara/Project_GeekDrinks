@@ -1,14 +1,14 @@
-import NavBar from '../components/NavBar';
-import dataTestsIds from '../utils/dataTestIds';
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import NavBar from '../components/NavBar';
 import SellerTableOrders from '../components/SellerTableOrders';
+import dataTestsIds from '../utils/dataTestIds';
 
 function OrderSellerDetails() {
   const [order, setOrder] = useState([]);
   const [status, setStatus] = useState('');
-  const DATE_SLICE = 10
+  const DATE_SLICE = 10;
   // const mockDetails = [{
   //   id: 2,
   //   seller: 'Fulana Pereira',
@@ -22,14 +22,14 @@ function OrderSellerDetails() {
     const token = JSON.parse(localStorage.getItem('user'));
     axios.get(`http://localhost:3001/seller/orders/${id}`, { headers: { Authorization: token.token } }).then(({ data }) => {
       setOrder(data);
-      console.log('details', order)
-      console.log('Id', id)
+      console.log('details', order);
+      console.log('Id', id);
     }).catch((err) => console.log(err));
-  }, [status]);
+  }, [status, id, order]);
 
   const changeStatusInDB = async (value) => {
     await axios.put(`http://localhost:3001/seller/orders/${id}`, { status: value });
-    console.log(value)
+    console.log(value);
   };
 
   const handleStatus = ({ target: { value } }) => {
@@ -40,7 +40,7 @@ function OrderSellerDetails() {
   return (
     <>
       <div className="container-product">
-          <NavBar />
+        <NavBar />
       </div>
       <main>
         <section>
@@ -56,7 +56,7 @@ function OrderSellerDetails() {
           <button
             type="button"
             data-testid={ `${dataTestsIds[57]}` }
-            value='Preparando'
+            value="Preparando"
             onClick={ handleStatus }
             disabled={ order.status !== 'Pendente' }
           >
@@ -65,19 +65,18 @@ function OrderSellerDetails() {
           <button
             type="button"
             data-testid={ `${dataTestsIds[58]}` }
-            value='Em Trânsito'
+            value="Em Trânsito"
             onClick={ handleStatus }
             disabled={ order.status !== 'Preparando' }
           >
             DISPATCH CHECK
           </button>
-          <SellerTableOrders order={ order }  />
-          
+          <SellerTableOrders order={ order } />
+
         </section>
-      
-  
+
         <div data-testid={ `${dataTestsIds[64]}` }>
-          { order.totalPrice?.replace(/\./, ",") }
+          { order.totalPrice?.replace(/\./, ',') }
         </div>
       </main>
     </>

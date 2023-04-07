@@ -19,7 +19,7 @@ function NavBar() {
           </div>
         </Link>
 
-        <Link to={`/${storage.role}/orders`}>
+        <Link to={ `/${storage.role}/orders` }>
           <div>
             <p data-testid={ dataTestsIds[12] }>Pedidos</p>
           </div>

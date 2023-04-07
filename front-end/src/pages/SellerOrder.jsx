@@ -1,11 +1,11 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
-import axios from 'axios';
 
 function SellerOrder() {
-  const [order, setOrder] = useState([]);
+  const [orderArray, setOrderArray] = useState([]);
   // const [status, setStatus] = useState('');
   const ten = 10;
   const history = useHistory();
@@ -31,8 +31,8 @@ function SellerOrder() {
 
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user'));
-    axios.get(`http://localhost:3001/sales`, { headers: { Authorization: token.token } }).then(({ data }) => {
-      setOrder(data);
+    axios.get('http://localhost:3001/sales', { headers: { Authorization: token.token } }).then(({ data }) => {
+      setOrderArray(data);
       // setStatus(data.status)
       // console.log('details', order)
       // console.log('Id', id)
@@ -48,7 +48,7 @@ function SellerOrder() {
       </div>
       <main>
         {
-          order?.map((order) => (
+          orderArray?.map((order) => (
             <card
               key={ order.id }
               onClick={
