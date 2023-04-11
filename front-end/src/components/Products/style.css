@@ -1,0 +1,23 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.imgCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-product {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.card-product-img {
+  width: 80px;
+  height: 80px;
+}

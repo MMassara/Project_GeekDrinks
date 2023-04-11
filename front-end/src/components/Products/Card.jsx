@@ -1,17 +1,20 @@
 import propTypes from 'prop-types';
 import React from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
+import './style.css';
 
 function Card({ product, handleChange, increment, decrement }) {
   return (
-    <section key={ product.id }>
+    <section
+      className="card-product"
+      key={ product.id }
+    >
       <figure className="imgCard">
         <img
+          className="card-product-img"
           data-testid={ `${dataTestsIds[17]}${product.id}` }
           src={ product.urlImage }
           alt={ product.name }
-          style={ { height: '100px',
-            width: '100px' } }
         />
         <p data-testid={ `${dataTestsIds[16]}${product.id}` }>
           { `R$ ${product.price.replace('.', ',')}` }
@@ -22,8 +25,7 @@ function Card({ product, handleChange, increment, decrement }) {
           { product.name }
         </p>
       </div>
-
-      <div className="product-quantity">
+      <div>
         <button
           type="button"
           data-testid={ `${dataTestsIds[19]}${product.id}` }
@@ -33,6 +35,7 @@ function Card({ product, handleChange, increment, decrement }) {
         </button>
 
         <input
+          style={ { width: '10%', textAlign: 'center' } }
           data-testid={ `${dataTestsIds[20]}${product.id}` }
           type="number"
           name={ `input${product.id}` }
@@ -51,7 +54,6 @@ function Card({ product, handleChange, increment, decrement }) {
           +
         </button>
       </div>
-
     </section>
   );
 }

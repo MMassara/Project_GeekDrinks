@@ -1,14 +1,14 @@
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import AdminManage from './pages/AdminManage';
 import Cart from './pages/Cart';
 import CustomerOrder from './pages/CustomerOrder';
 import Login from './pages/Login';
 import OrderDetails from './pages/OrderDetails';
+import OrderSellerDetails from './pages/OrderSellerDetails';
 import Products from './pages/Products';
 import Register from './pages/Register';
-import OrderSellerDetails from './pages/OrderSellerDetails';
 import SellerOrder from './pages/SellerOrder';
-import AdminManage from './pages/AdminManage';
 
 export default function App() {
   return (
