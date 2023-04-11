@@ -5,6 +5,18 @@ import Countdown from '../components/Cart/Countdown';
 import Table from '../components/Cart/Table';
 import Navbar from '../components/NavBar/NavBar';
 import calcTotalPrice from '../utils/calcTotalPrice';
+import styled from 'styled-components';
+
+const Main = styled.section`
+    background-color: #FFF3E0;
+    height: 100vh;
+    section {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+    }
+  `;
 
 export default function Cart() {
   const [products, setProducts] = useState([]);
@@ -68,23 +80,26 @@ export default function Cart() {
   };
 
   return (
-    <section>
+    <Main>
       {isFinish ? (
         <Countdown saleId={ sallesApi } />
       ) : (
-        <section>
+        <>
           <Navbar />
-          <Table
-            products={ products }
-            removeProduct={ removeProduct }
-          />
-          <AddressForm
-            sellers={ sellers }
-            finishPurchase={ finishPurchase }
-            handleChange={ handleChange }
-          />
-        </section>
+          <section>
+            <Table
+              products={ products }
+              removeProduct={ removeProduct }
+            />
+            <AddressForm
+              sellers={ sellers }
+              finishPurchase={ finishPurchase }
+              handleChange={ handleChange }
+            />
+          </section>
+        </>
+        
       )}
-    </section>
+    </Main>
   );
 }

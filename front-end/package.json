@@ -31,6 +31,7 @@
     "react-router-dom": "5.3.4",
     "react-scripts": "5.0.0",
     "serve": "13.0.2",
+    "styled-components": "^5.3.9",
     "web-vitals": "2.1.4"
   },
   "devDependencies": {
