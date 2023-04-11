@@ -27,6 +27,7 @@ const createSale = async (body) => {
 
 const get = async (userId) => {
   const dataValues = await User.findAll({ where: { id: userId } });
+  console.log(dataValues);
   if (dataValues[0].role === 'seller') {
     const result = await Sale.findAll();
     return result;

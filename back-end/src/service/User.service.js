@@ -8,9 +8,10 @@ const createUser = async ({ name, email, password, role }) => {
   const verifyUser = await User.findOne({ where: { email } });
   if (verifyUser) throw new Error('User already registered');
 
-  const newUser = await User.create({ name, email, password: userPassword, role });
+  await User.create({ name, email, password: userPassword, role });
 
-  return newUser.id;
+  const result = await User.findOne({ where: { email } });
+  return { id: result.id, name: result.name, email: result.email, role: result.role };
 };
 
 const addUserByAdm = async ({ name, email, password, role = 'customer' }) => {

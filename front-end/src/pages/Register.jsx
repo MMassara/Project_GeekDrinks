@@ -29,10 +29,10 @@ export default function Register() {
     try {
       const { data } = await api.post('http://localhost:3001/register', user);
       console.log(data);
-      const { id, ...userInfo } = data;
+      const { token, id: { name, email, role } } = data;
       // guarda os dados do usuario do retorno da Api no local storage
-      localStorage.setItem('user', JSON.stringify(userInfo));
-      localStorage.setItem('userId', JSON.stringify(id));
+      localStorage.setItem('user', JSON.stringify({ token, name, email, role }));
+      localStorage.setItem('userId', JSON.stringify(data.id.id));
       // pega a role da pessoa cadastrada
       history.push('/customer/products');
     } catch ({ response: { data: { message } } }) {
