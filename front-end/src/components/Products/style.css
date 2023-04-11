@@ -4,6 +4,10 @@
   font-family: Roboto;
 }
 
+body {
+  background-color: #FFF3E0;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
