@@ -1,8 +1,8 @@
 import propTypes from 'prop-types';
 import styled from 'styled-components';
+import { Grid, Paper, TextField } from '@mui/material';
 import React from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
-import { Grid, Paper, TextField } from '@mui/material';
 
 const Details = styled.div`
   display: flex;
@@ -29,7 +29,6 @@ const Details = styled.div`
   }
 
 `;
-
 
 const FinishButton = styled.button`
   background-color: #D36934;
