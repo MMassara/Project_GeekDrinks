@@ -1,7 +1,9 @@
+import { Grid } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
+import Card from '../components/Products/Card';
 import dataTestsIds from '../utils/dataTestIds';
 
 function Products() {
@@ -61,59 +63,26 @@ function Products() {
         <NavBar />
       </header>
       <main>
-        {
-          products?.map((product, index) => (
-            <section key={ index }>
-              <figure className="imgCard">
-                <img
-                  data-testid={ `${dataTestsIds[17]}${product.id}` }
-                  src={ product.urlImage }
-                  alt={ product.name }
-                  style={ { height: '100px',
-                    width: '100px' } }
-                />
-                <p data-testid={ `${dataTestsIds[16]}${product.id}` }>
-                  { `R$ ${product.price.replace('.', ',')}` }
-                </p>
-              </figure>
-              <div>
-                <p data-testid={ `${dataTestsIds[15]}${product.id}` }>
-                  { product.name }
-                </p>
-              </div>
-
-              <div className="product-quantity">
-                <button
-                  type="button"
-                  data-testid={ `${dataTestsIds[19]}${product.id}` }
-                  onClick={ () => decrement(product.id) }
-                >
-                  -
-                </button>
-
-                <input
-                  data-testid={ `${dataTestsIds[20]}${product.id}` }
-                  type="number"
-                  name={ `input${index}` }
-                  value={ product.quantity }
-                  min="0"
-                  onChange={
-                    ({ target: { value } }) => handleChange(product.id, Number(value))
-                  }
-                />
-
-                <button
-                  type="button"
-                  data-testid={ `${dataTestsIds[18]}${product.id}` }
-                  onClick={ () => increment(product.id) }
-                >
-                  +
-                </button>
-              </div>
-
-            </section>
-          ))
-        }
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          style={ { backgroundColor: '#FFF3E0' } }
+          sx={ { mt: 3, mb: 2 } }
+        >
+          {
+            products?.map((product) => (
+              <Card
+                key={ product.id }
+                product={ product }
+                handleChange={ handleChange }
+                increment={ increment }
+                decrement={ decrement }
+              />
+            ))
+          }
+        </Grid>
         <button
           type="button"
           data-testid={ `${dataTestsIds[21]}` }
