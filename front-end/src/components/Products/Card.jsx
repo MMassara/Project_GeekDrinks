@@ -1,9 +1,24 @@
 import propTypes from 'prop-types';
+import { TextField, Paper } from '@mui/material';
+import Button from '@mui/material/Button';
 import React from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
 import './style.css';
 
 function Card({ product, handleChange, increment, decrement }) {
+  // const buttonStyle = {
+  //   fontWeight: '600',
+  //   color: '#FFF',
+  //   background: '#C94E35',
+  //   width: '5px',
+  // };
+
+  // const textFildStyle = {
+  //   fontWeight: '600',
+  //   width: '15%',
+  //   textAlign: 'center',
+  //   background: '#FFF',
+  // };
   return (
     <section
       className="card-product"
@@ -25,9 +40,14 @@ function Card({ product, handleChange, increment, decrement }) {
           { product.name }
         </p>
       </div>
-      <div>
+      <div className="buttons">
         <button
+          variant="outlined"
+          className="button"
+          // sx={ buttonStyle }
           type="button"
+          size="large"
+          component={ Paper }
           data-testid={ `${dataTestsIds[19]}${product.id}` }
           onClick={ () => decrement(product.id) }
         >
@@ -35,7 +55,10 @@ function Card({ product, handleChange, increment, decrement }) {
         </button>
 
         <input
-          style={ { width: '10%', textAlign: 'center' } }
+          // style={ { width: '10%', textAlign: 'center' } }
+          component={ Paper }
+          className="quatityInput"
+          // sx={ textFildStyle }
           data-testid={ `${dataTestsIds[20]}${product.id}` }
           type="number"
           name={ `input${product.id}` }
@@ -47,7 +70,11 @@ function Card({ product, handleChange, increment, decrement }) {
         />
 
         <button
+          variant="outlined"
+          className="button"
+          // sx={ buttonStyle }
           type="button"
+          component={ Paper }
           data-testid={ `${dataTestsIds[18]}${product.id}` }
           onClick={ () => increment(product.id) }
         >

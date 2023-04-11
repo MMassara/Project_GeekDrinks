@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Righteous&family=Roboto:ital,wght@0,300;0,500;0,700;1,300&family=Yantramanav:wght@400;500;700&display=swap');
+
+* {
+  font-family: Roboto;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -12,12 +18,59 @@ input::-webkit-inner-spin-button {
 
 .card-product {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 10px;
+  padding: 30px;
+  background-color: #EEB82E;
+  border-radius: 5px;
+  box-shadow: -4px 2px 20px rgb(126, 125, 125);
+}
+
+.imgCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
 }
 
 .card-product-img {
   width: 80px;
   height: 80px;
+  border-radius: 5px;
+  box-shadow: -4px 2px 10px #a06e23;
 }
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  font-weight: 600;
+  color: #FFF;
+  background: #D36934;
+  width: 15%;
+  padding: 10px;
+  border: 0;
+  /* border-color: #234da0; */
+  margin: 5px;
+  border-radius: 5px;
+}
+
+.button:hover {
+  background: #b7442d;
+  transition:  0.32s ease-in-out;
+}
+
+.quatityInput{
+  font-weight: 600;
+  width: 15%;
+  text-align: center;
+  background: #FFF;
+  border: 0;
+  border-radius: 5px;
+}
+
