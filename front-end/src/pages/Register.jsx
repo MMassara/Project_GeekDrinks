@@ -1,8 +1,11 @@
+import { Grid, Paper, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import api from '../axios/config';
 import { checkEmailAndPassword, checkUser } from '../utils/checkUser';
 import dataTestsIds from '../utils/dataTestIds';
+import logo from '../images/Logo-projeto.jpg';
 
 export default function Register() {
   // state para guardar os dados do usuario
@@ -38,6 +41,15 @@ export default function Register() {
     }
   };
 
+  const buttonStyle = {
+    fontWeight: '600',
+    color: '#FFF',
+    background: '#C94E35',
+    width: '90%',
+    mt: 3,
+    mb: 2,
+  };
+
   useEffect(() => {
     const validateForm = () => {
       const { email, password, name } = user;
@@ -54,60 +66,97 @@ export default function Register() {
   }, [user]);
 
   return (
-    <section>
-      <section>
-        <form className="registerForm" onSubmit={ register }>
-          <input
-            className="inputRegister"
-            type="text"
-            name="name"
-            placeholder="Nome"
-            onChange={ handleChange }
-            value={ user.name }
-            data-testid={ dataTestsIds[6] }
-          />
-          <input
-            className="inputRegister"
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={ user.email }
-            onChange={ handleChange }
-            data-testid={ dataTestsIds[7] }
-          />
-          <input
-            className="inputRegister"
-            type="password"
-            name="password"
-            placeholder="Senha"
-            onChange={ handleChange }
-            value={ user.password }
-            data-testid={ dataTestsIds[8] }
-          />
-          <button
-            type="submit"
-            className="registerBtn"
-            disabled={ isDisable }
-            data-testid={ dataTestsIds[9] }
-          >
-            Cadastre-se
-          </button>
-          <button
-            type="button"
-            className="registerLoginBtn"
-            onClick={ () => history.push('/login') }
-          >
-            Já tenho conta
-          </button>
-          <span
-            className="registerError"
-            data-testid={ dataTestsIds[10] }
-            style={ { display: errorMessage ? 'block' : 'none' } }
-          >
-            {errorMessage}
-          </span>
-        </form>
-      </section>
-    </section>
+    <Grid
+      container
+      direction="column"
+      justifyContent="center"
+      alignItems="center"
+      style={ { height: '100vh', backgroundColor: '#FFF3E0' } }
+    >
+      <img src={ logo } alt="logo do app de delivery" />
+      <Grid
+        container
+        padding="15px"
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+        sx={ { width: '40%', mt: 2, mb: 3 } }
+        component={ Paper }
+        elevation={ 6 }
+        bgcolor="#EEB82E"
+      >
+        <TextField
+          required
+          component={ Paper }
+          label="Nome"
+          type="text"
+          name="name"
+          sx={ { width: '90%', mt: 3, mb: 2 } }
+          autoComplete="current-email"
+          className="inputRegister"
+          placeholder="Nome"
+          onChange={ handleChange }
+          value={ user.name }
+          data-testid={ dataTestsIds[6] }
+        />
+        <TextField
+          required
+          component={ Paper }
+          label="Email"
+          type="email"
+          name="email"
+          sx={ { width: '90%', mt: 3, mb: 2 } }
+          autoComplete="current-email"
+          className="inputRegister"
+          placeholder="Email"
+          value={ user.email }
+          onChange={ handleChange }
+          data-testid={ dataTestsIds[7] }
+        />
+        <TextField
+          required
+          component={ Paper }
+          label="Password"
+          type="password"
+          sx={ { width: '90%', mt: 2, mb: 3 } }
+          autoComplete="current-password"
+          name="password"
+          className="inputRegister"
+          placeholder="Senha"
+          onChange={ handleChange }
+          value={ user.password }
+          data-testid={ dataTestsIds[8] }
+        />
+        <Button
+          variant="contained"
+          fullWidth
+          sx={ buttonStyle }
+          type="submit"
+          className="registerBtn"
+          disabled={ isDisable }
+          data-testid={ dataTestsIds[9] }
+          onClick={ register }
+        >
+          Cadastre-se
+        </Button>
+        <Button
+          type="button"
+          fullWidth
+          variant="outlined"
+          sx={ buttonStyle }
+          className="registerLoginBtn"
+          onClick={ () => history.push('/login') }
+        >
+          Já tenho conta
+        </Button>
+        <span
+          className="registerError"
+          data-testid={ dataTestsIds[10] }
+          style={ { display: errorMessage ? 'block' : 'none' } }
+        >
+          {errorMessage}
+        </span>
+      </Grid>
+    </Grid>
   );
 }

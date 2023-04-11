@@ -1,6 +1,5 @@
 import propTypes from 'prop-types';
-import { TextField, Paper } from '@mui/material';
-import Button from '@mui/material/Button';
+import { Paper } from '@mui/material';
 import React from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
 import './style.css';
