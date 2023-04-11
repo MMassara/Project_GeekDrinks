@@ -30,7 +30,10 @@ function NavBar() {
               marginTop: '40px',
               textDecoration: 'none' } }
           >
-            <Link to="/customer/products">
+            <Link
+              to="/customer/products"
+              style={ { textDecoration: 'none', color: 'white' } }
+            >
               Produtos
             </Link>
           </Button>
@@ -41,10 +44,12 @@ function NavBar() {
             style={ { backgroundColor: '#D36934',
               height: '4vh',
               width: '120px',
-              marginTop: '40px',
-              textDecoration: 'none' } }
+              marginTop: '40px' } }
           >
-            <Link to={ `/${storage.role}/orders` }>
+            <Link
+              to={ `/${storage.role}/orders` }
+              style={ { textDecoration: 'none', color: 'white' } }
+            >
               Pedidos
             </Link>
           </Button>
@@ -53,14 +58,14 @@ function NavBar() {
           <p
             style={ { height: '4vh',
               width: '120px',
-              fontSize: '20px',
+              fontSize: '17px',
               marginRight: '10px',
               marginTop: '45px' } }
             data-testid={ dataTestsIds[13] }
           >
             { storage.name }
           </p>
-          <Link to="/">
+          <Link to="/" style={ { textDecoration: 'none', color: 'white' } }>
             <Button
               type="button"
               onClick={ logout }
@@ -68,8 +73,7 @@ function NavBar() {
               style={ { backgroundColor: '#D36934',
                 height: '4vh',
                 width: '120px',
-                marginTop: '40px',
-                textDecoration: 'none' } }
+                marginTop: '40px' } }
               data-testid={ dataTestsIds[14] }
             >
               Logout
