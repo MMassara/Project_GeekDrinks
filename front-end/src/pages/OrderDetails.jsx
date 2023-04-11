@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 import TableOrders from '../components/TableOrders';
 import dataTestsIds from '../utils/dataTestIds';
 

@@ -1,0 +1,18 @@
+.main-container {
+    background-color:#FFF3E0;
+}
+
+.nav-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.logo-class {
+    height: 100px;
+    margin: 10px;
+}
+
+.logout-area {
+    display: flex;
+}
