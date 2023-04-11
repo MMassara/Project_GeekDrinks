@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import Navbar from '../components/NavBar/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
 
 function CustomerOrder() {
@@ -20,7 +20,7 @@ function CustomerOrder() {
     <>
       <div className="container-product">
         <header>
-          <NavBar />
+          <Navbar />
         </header>
       </div>
       <main>

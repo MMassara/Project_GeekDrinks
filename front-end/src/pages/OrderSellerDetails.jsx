@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 import SellerTableOrders from '../components/SellerTableOrders';
 import dataTestsIds from '../utils/dataTestIds';
 
@@ -9,14 +9,6 @@ function OrderSellerDetails() {
   const [order, setOrder] = useState([]);
   const [status, setStatus] = useState('');
   const DATE_SLICE = 10;
-  // const mockDetails = [{
-  //   id: 2,
-  //   seller: 'Fulana Pereira',
-  //   date: '03/04/2023',
-  //   status: 'Pendente',
-  //   items: [{ itemId: 1, name: 'Cerveja Stella 250ml', quantity: 3, price: 3.50 }],
-  //   totalPrice: 10.50,
-  // }];
   const { id } = useParams();
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user'));

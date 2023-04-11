@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 import Card from '../components/Products/Card';
 import dataTestsIds from '../utils/dataTestIds';
 

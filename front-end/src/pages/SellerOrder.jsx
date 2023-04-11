@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
 import dataTestsIds from '../utils/dataTestIds';
 
 function SellerOrder() {
@@ -9,26 +9,6 @@ function SellerOrder() {
   // const [status, setStatus] = useState('');
   const ten = 10;
   const history = useHistory();
-  // const mockOrders = [{
-  //   id: 1,
-  //   status: 'Pendente',
-  //   date: '08/04/21',
-  //   price: 23.80,
-  //   address: 'Rua Aemon',
-  // }, {
-  //   id: 2,
-  //   status: 'Preparando',
-  //   date: '08/04/21',
-  //   price: 14.20,
-  //   address: 'Rua Daenerys',
-  // }, {
-  //   id: 3,
-  //   status: 'Entregue',
-  //   date: '07/04/21',
-  //   price: 28.46,
-  //   address: 'Rua jão das neves',
-  // }];
-
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem('user'));
     axios.get('http://localhost:3001/sales', { headers: { Authorization: token.token } }).then(({ data }) => {

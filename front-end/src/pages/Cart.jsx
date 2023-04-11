@@ -3,7 +3,7 @@ import api, { setToken } from '../axios/config';
 import AddressForm from '../components/Cart/AddressForm';
 import Countdown from '../components/Cart/Countdown';
 import Table from '../components/Cart/Table';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/NavBar/NavBar';
 import calcTotalPrice from '../utils/calcTotalPrice';
 
 export default function Cart() {
