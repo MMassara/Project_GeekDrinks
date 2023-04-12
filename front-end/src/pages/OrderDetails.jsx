@@ -4,6 +4,20 @@ import { useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import TableOrders from '../components/TableOrders';
 import dataTestsIds from '../utils/dataTestIds';
+import styled from 'styled-components';
+
+const Main = styled.section`
+    background-color: #FFF3E0;
+    height: 100vh;
+    /* margin-top: 30px; */
+    margin: 30px;
+    section {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+    }
+  `;
 
 export default function OrderDetails() {
   const [sales, setSalles] = useState({});
@@ -33,7 +47,7 @@ export default function OrderDetails() {
           <NavBar />
         </header>
       </div>
-      <main>
+      <Main>
         <section>
           <div data-testid={ `${dataTestsIds[38]}` }>
             {`Pedido ${sales.id}`}
@@ -53,7 +67,7 @@ export default function OrderDetails() {
             {`Total: ${sales.totalPrice?.replace(/\./, ',')}`}
           </div>
         </section>
-      </main>
+      </Main>
     </>
   );
 }
