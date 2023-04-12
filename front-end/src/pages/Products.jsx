@@ -13,18 +13,29 @@ function Products() {
 
   useEffect(() => {
     axios.get('http://localhost:3001/products').then(({ data }) => {
-      setProducts(data.map((allData) => ({ ...allData, quantity: 0 })));
+      const localProducts = JSON.parse(localStorage.getItem('products')) || [];
+      const stateProducts = data.map((allData) => ({ ...allData, quantity: 0 }));
+      const reponse = stateProducts.map((element) => {
+        const objt = localProducts.find((product) => product.name === element.name);
+        if (objt) {
+          return objt;
+        }
+        return element;
+      });
+      // const filteredProducts = localProducts.filter(({ quantity }) => quantity > 0);
+      setProducts(reponse);
     });
   }, []);
 
   useEffect(() => {
-    function setProductsOnLocalStorage() {
-      const filteredProducts = products.filter(({ quantity }) => quantity > 0);
-      localStorage.setItem('products', JSON.stringify(filteredProducts));
-      setIsDisabled(!products.some(({ quantity }) => quantity > 0));
-    }
-    setProductsOnLocalStorage();
+    setIsDisabled(!products.some(({ quantity }) => quantity > 0));
   }, [products]);
+
+  function setProductsOnLocalStorage() {
+    const filteredProducts = products.filter(({ quantity }) => quantity > 0);
+    localStorage.setItem('products', JSON.stringify(filteredProducts));
+    // setIsDisabled(!products.some(({ quantity }) => quantity > 0));
+  }
 
   const handleChange = (id, value) => {
     setProducts((prevProducts) => prevProducts.map((product) => {
@@ -42,6 +53,7 @@ function Products() {
       }
       return product;
     }));
+    setProductsOnLocalStorage();
   };
 
   const decrement = (id) => {
@@ -51,6 +63,7 @@ function Products() {
       }
       return product;
     }));
+    setProductsOnLocalStorage();
   };
 
   const calcProducts = () => products.map(({ quantity, price }) => (
