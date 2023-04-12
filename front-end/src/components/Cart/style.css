@@ -1,0 +1,11 @@
+.countdown {
+    background-color: #EEB82E;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.countdown-text {
+    margin: 15px;
+}
