@@ -5,13 +5,13 @@ const { registerValidation } = require('../utils/jwtGenerator');
 
 const router = express.Router();
 
-router.get('/users', adminController.getUsers);
 router.post(
-  '/user/admin/register',
+  '/admin/user/register',
   tokenValidation,
   registerValidation,
   adminController.createUser,
 );
-router.delete('/user/:id', tokenValidation, adminController.deleteUser);
+router.get('/admin/users', adminController.getUsers);
+router.delete('/admin/user/:id', tokenValidation, adminController.deleteUser);
 
 module.exports = router;

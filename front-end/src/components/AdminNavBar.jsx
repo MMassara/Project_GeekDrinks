@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import dataTestsIds from '../utils/dataTestIds';
 
-function NavBarAdmin() {
+function AdminNavBar() {
   const [user, setUser] = useState();
 
   const logout = () => {
@@ -43,4 +43,4 @@ function NavBarAdmin() {
   );
 }
 
-export default NavBarAdmin;
+export default AdminNavBar;
