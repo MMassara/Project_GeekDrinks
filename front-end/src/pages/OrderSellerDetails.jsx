@@ -4,6 +4,48 @@ import { useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import SellerTableOrders from '../components/SellerTableOrders';
 import dataTestsIds from '../utils/dataTestIds';
+import styled from 'styled-components';
+
+const Main = styled.section`
+    background-color: #FFF3E0;
+    height: 100vh;
+    margin: 30px;
+    section {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .total {
+      background-color: #C94E35;
+      padding: 10px;
+      border-radius: 5px;
+      width: 200px;
+      color: #FFF;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 5px;
+      border: 1px solid black;
+      width: 200px;
+      margin: 5px;
+      border-radius: 5px;
+      box-shadow: 1px 1px 1px #000;
+    }
+
+    .title-order {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .container-buttons {
+      align-items: center;
+    }
+  `;
 
 function OrderSellerDetails() {
   const [order, setOrder] = useState([]);
@@ -34,43 +76,51 @@ function OrderSellerDetails() {
       <div className="container-product">
         <NavBar />
       </div>
-      <main>
+      <Main>
         <section>
-          <div data-testid={ `${dataTestsIds[54]}` }>
-            {`${order.id}`}
+          <div className="title-order">
+            <div>
+              <div data-testid={ `${dataTestsIds[54]}` }>
+                <p>Pedido: {`${order.id}`}</p>
+              </div>
+              <div data-testid={ `${dataTestsIds[56]}` }>
+                <p>Data: {order.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}</p>
+              </div>
+              <div data-testid={ `${dataTestsIds[55]}` }>
+                <p>Status: {order.status}</p>
+              </div>
+            </div>
+            <div className="container-buttons">
+              <button
+                type="button"
+                data-testid={ `${dataTestsIds[57]}` }
+                value="Preparando"
+                onClick={ handleStatus }
+                disabled={ order.status !== 'Pendente' }
+              >
+                PREPARING CHECK
+              </button>
+              <button
+                type="button"
+                data-testid={ `${dataTestsIds[58]}` }
+                value="Em Trânsito"
+                onClick={ handleStatus }
+                disabled={ order.status !== 'Preparando' }
+              >
+                DISPATCH CHECK
+              </button>
+            </div>
+            
           </div>
-          <div data-testid={ `${dataTestsIds[56]}` }>
-            {order.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}
-          </div>
-          <div data-testid={ `${dataTestsIds[55]}` }>
-            {order.status}
-          </div>
-          <button
-            type="button"
-            data-testid={ `${dataTestsIds[57]}` }
-            value="Preparando"
-            onClick={ handleStatus }
-            disabled={ order.status !== 'Pendente' }
-          >
-            PREPARING CHECK
-          </button>
-          <button
-            type="button"
-            data-testid={ `${dataTestsIds[58]}` }
-            value="Em Trânsito"
-            onClick={ handleStatus }
-            disabled={ order.status !== 'Preparando' }
-          >
-            DISPATCH CHECK
-          </button>
+          
           <SellerTableOrders order={ order } />
 
         </section>
 
-        <div data-testid={ `${dataTestsIds[64]}` }>
-          { order.totalPrice?.replace(/\./, ',') }
+        <div className="total" data-testid={ `${dataTestsIds[64]}` }>
+          TOTAL A PAGAR R$ { order.totalPrice?.replace(/\./, ',') }
         </div>
-      </main>
+      </Main>
     </>
   );
 }

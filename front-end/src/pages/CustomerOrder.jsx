@@ -10,8 +10,8 @@ function CustomerOrder() {
   const history = useHistory();
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem('user'));
-    axios.get('http://localhost:3001/sales', { headers: { Authorization: token.token } }).then(({ data }) => {
+    const { token } = JSON.parse(localStorage.getItem('user'));
+    axios.get('http://localhost:3001/sales', { headers: { Authorization: token } }).then(({ data }) => {
       setOrders(data);
     }).catch((err) => console.log(err));
   }, []);

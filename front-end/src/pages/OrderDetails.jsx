@@ -9,7 +9,6 @@ import dataTestsIds from '../utils/dataTestIds';
 const Main = styled.section`
     background-color: #FFF3E0;
     height: 100vh;
-    /* margin-top: 30px; */
     margin: 30px;
     section {
       display: flex;
