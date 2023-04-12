@@ -32,7 +32,7 @@ const ListOrdersDetails = styled.table`
     border-radius: 5px;
   }
   
-`
+`;
 
 export default function TableOrders({ sales: { items }, status, handleStatus }) {
   return (
