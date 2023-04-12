@@ -1,9 +1,17 @@
-const { Router } = require('express');
-const admController = require('../controller/adm.controller');
-const admValid = require('../errors/admTokenValidation');
+const express = require('express');
+const adminController = require('../controller/adm.controller');
+const { tokenValidation } = require('../utils/jwtGenerator');
+const { registerValidation } = require('../utils/jwtGenerator');
 
-const router = Router();
+const router = express.Router();
 
-router.post('/admin/manage', admValid, admController.addUserByAdm);
+router.get('/users', adminController.getUsers);
+router.post(
+  '/user/admin/register',
+  tokenValidation,
+  registerValidation,
+  adminController.createUser,
+);
+router.delete('/user/:id', tokenValidation, adminController.deleteUser);
 
 module.exports = router;

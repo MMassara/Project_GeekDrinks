@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import dataTestsIds from '../utils/dataTestIds';
+import NavBarAdmin from '../components/AdminNavBar';
 
 function AdminManage() {
   const [name, setName] = useState('');
@@ -31,6 +32,7 @@ function AdminManage() {
 
   return (
     <section>
+      <NavBarAdmin />
       <section>
         <form className="adminRegister">
           <input
@@ -68,7 +70,7 @@ function AdminManage() {
             value={ role }
             required
           >
-            <option selected value="">Please choose a role</option>
+            <option value="">Please choose a role</option>
             <option value="customer">Customer</option>
             <option value="seller">Seller</option>
           </select>
