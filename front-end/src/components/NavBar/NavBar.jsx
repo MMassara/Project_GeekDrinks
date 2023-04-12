@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import dataTestsIds from '../../utils/dataTestIds';
 import './style.css';
-import logoImage from '../../images/Logo-projeto.jpg';
+import logoImage from '../../images/Logo-projeto2.png';
 
 function NavBar() {
   const logout = () => {
