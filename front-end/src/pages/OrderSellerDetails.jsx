@@ -1,10 +1,10 @@
 import axios from 'axios';
+import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import SellerTableOrders from '../components/SellerTableOrders';
 import dataTestsIds from '../utils/dataTestIds';
-import styled from 'styled-components';
 
 const Main = styled.section`
     background-color: #FFF3E0;
@@ -18,12 +18,19 @@ const Main = styled.section`
     }
 
     .total {
+      width: 100%;
+      color: #FFF;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+    }
+
+    .value-total {
+      width: 200px;
       background-color: #C94E35;
       padding: 10px;
       border-radius: 5px;
-      width: 200px;
-      color: #FFF;
-      font-weight: bold;
+      border: 3px solid black;
     }
 
     button {
@@ -118,7 +125,11 @@ function OrderSellerDetails() {
         </section>
 
         <div className="total" data-testid={ `${dataTestsIds[64]}` }>
-          TOTAL A PAGAR R$ { order.totalPrice?.replace(/\./, ',') }
+          <div className="value-total">
+            <p>
+              {`TOTAL A PAGAR R$ ${order.totalPrice?.replace(/\./, ',')}`}
+            </p>
+          </div>
         </div>
       </Main>
     </>
