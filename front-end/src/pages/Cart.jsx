@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import React, { useEffect, useState } from 'react';
 import api, { setToken } from '../axios/config';
 import AddressForm from '../components/Cart/AddressForm';
@@ -5,7 +6,6 @@ import Countdown from '../components/Cart/Countdown';
 import Table from '../components/Cart/Table';
 import Navbar from '../components/NavBar/NavBar';
 import calcTotalPrice from '../utils/calcTotalPrice';
-import styled from 'styled-components';
 
 const Main = styled.section`
     background-color: #FFF3E0;
@@ -98,7 +98,6 @@ export default function Cart() {
             />
           </section>
         </>
-        
       )}
     </Main>
   );

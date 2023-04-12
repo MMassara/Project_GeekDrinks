@@ -1,6 +1,7 @@
 import propTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import './style.css';
 
 export default function Countdown({ saleId }) {
   const COUNT = 3;
@@ -22,10 +23,12 @@ export default function Countdown({ saleId }) {
 
   return (
     <section className="countdown">
-      <span>
+      <span className="countdown-text">
         Compra realizada com sucesso!
       </span>
-      <span>{`Você será redirecionado em ${countdown}...`}</span>
+      <span className="countdown-text">
+        {`Você será redirecionado em ${countdown}...`}
+      </span>
     </section>
   );
 }

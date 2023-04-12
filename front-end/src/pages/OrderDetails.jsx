@@ -1,10 +1,10 @@
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import TableOrders from '../components/TableOrders';
 import dataTestsIds from '../utils/dataTestIds';
-import styled from 'styled-components';
 
 const Main = styled.section`
     background-color: #FFF3E0;
@@ -15,6 +15,30 @@ const Main = styled.section`
       width: 100%;
       flex-direction: column;
       justify-content: center;
+    }
+
+    div {
+      margin: auto;
+      background-color: #C94E35;
+      width: 340px;
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      border-radius: 5px;
+      color: white;
+    }
+
+    .total-value {
+      background-color: #C94E35;
+      padding: 10px;
+      border-radius: 5px;
+      width: 200px;
+      height: 20px;
+      color: #FFF;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      border: 3px solid black;
     }
   `;
 
@@ -52,18 +76,19 @@ export default function OrderDetails() {
             {`Pedido ${sales.id}`}
           </div>
           <div data-testid={ `${dataTestsIds[39]}` }>
-            <p>Fulana Pereira</p>
+            <p>Vendedor(a): Fulana Pereira</p>
           </div>
           <div data-testid={ `${dataTestsIds[40]}` }>
-            {sales.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}
+            {`Data: 
+            ${sales.saleDate?.slice(0, DATE_SLICE).split('-').reverse().join('/')}`}
           </div>
           <TableOrders
             sales={ sales }
             status={ status }
             handleStatus={ handleStatus }
           />
-          <div data-testid={ `${dataTestsIds[47]}` }>
-            {`Total: ${sales.totalPrice?.replace(/\./, ',')}`}
+          <div data-testid={ `${dataTestsIds[47]}` } className="total-value">
+            {`Total: $ ${sales.totalPrice?.replace(/\./, ',')}`}
           </div>
         </section>
       </Main>
