@@ -1,8 +1,9 @@
 import propTypes from 'prop-types';
+import styled from 'styled-components';
 import React from 'react';
 import calcTotalPrice from '../../utils/calcTotalPrice';
 import dataTestsIds from '../../utils/dataTestIds';
-import styled from 'styled-components';
+import './style.css';
 
 const ListOrders = styled.table`
 
@@ -43,7 +44,7 @@ const ListOrders = styled.table`
     border-radius: 5px;
   }
   
-`
+`;
 
 export default function Table({ products, removeProduct }) {
   const thArr = [
@@ -55,10 +56,11 @@ export default function Table({ products, removeProduct }) {
     'Remover Item',
   ];
 
-
   return (
     <div className="tableContainer">
-      <h1 className="tableTitle">Finalizar Pedido</h1>
+      <div className="tableTitle">
+        <h1>Detalhes do pedido</h1>
+      </div>
       <section className="tableSection">
         <ListOrders className="table">
           <thead>
@@ -102,7 +104,6 @@ export default function Table({ products, removeProduct }) {
                   <p className="totalPrice tableItem">
                     {`R$ ${(Number(price) * Number(quantity))
                       .toFixed(2).replace('.', ',')}`}
-
                   </p>
                 </td>
                 <td>

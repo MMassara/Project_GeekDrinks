@@ -13,6 +13,7 @@ function SellerOrder() {
     const token = JSON.parse(localStorage.getItem('user'));
     axios.get('http://localhost:3001/sales', { headers: { Authorization: token.token } }).then(({ data }) => {
       setOrderArray(data);
+      console.log('DATA:', data);
       // setStatus(data.status)
       // console.log('details', order)
       // console.log('Id', id)

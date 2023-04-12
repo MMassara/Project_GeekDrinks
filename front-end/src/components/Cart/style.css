@@ -9,3 +9,33 @@
 .countdown-text {
     margin: 15px;
 }
+
+.tableTitle {
+    display: flex;
+    justify-content: center;
+    background-color: #DC8332;
+    border: 1px solid black;
+    width: 100%;
+    color: white;
+}
+
+.cartSection {
+    border: 1px solid black;
+    background-color: #E59E30;
+    display: flex;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.tableTotalPrice {
+    background-color: #C94E35;
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+    height: 20px;
+    color: #FFF;
+    font-weight: bold;
+    margin: auto;
+    border: 3px solid black;
+    text-align: center;
+}

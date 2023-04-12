@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Grid, Paper, TextField } from '@mui/material';
 import React from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
+import './style.css';
 
 const Details = styled.div`
   display: flex;
@@ -34,7 +35,7 @@ const FinishButton = styled.button`
   background-color: #D36934;
   height: 4vh;
   width: 150px;
-  margin-top: 40px;
+  margin-top: 5px;
   text-decoration: none;
   border-radius: 5px;
   border: none;
@@ -46,7 +47,7 @@ const FinishButton = styled.button`
 export default function AddressForm({ sellers, finishPurchase, handleChange }) {
   return (
     <section className="cartSection">
-      <h2>Detalhes e Endereço para Entrega</h2>
+      <h2>Endereço para Entrega</h2>
       <form onSubmit={ finishPurchase } className="cartForm">
         <Details className="sellerSection">
           <label htmlFor="select">
@@ -65,26 +66,28 @@ export default function AddressForm({ sellers, finishPurchase, handleChange }) {
           </label>
           <label htmlFor="address">
             Endereço:
-             <TextField
+            <TextField
               required
-              component={ Paper }              
+              component={ Paper }
+              onChange={ handleChange }
             />
           </label>
           <label htmlFor="houseNumber">
             Número:
             <TextField
               required
-              component={ Paper }              
+              component={ Paper }
+              onChange={ handleChange }
             />
           </label>
+          <FinishButton
+            type="submit"
+            data-testid={ `${dataTestsIds[33]}` }
+            className="finishPurchaseBtn"
+          >
+            FINALIZAR PEDIDO
+          </FinishButton>
         </Details>
-        <FinishButton
-          type="submit"
-          data-testid={ `${dataTestsIds[33]}` }
-          className="finishPurchaseBtn"
-        >
-          FINALIZAR PEDIDO
-        </FinishButton>
       </form>
     </section>
   );
