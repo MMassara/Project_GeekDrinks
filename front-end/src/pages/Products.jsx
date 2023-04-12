@@ -1,10 +1,28 @@
 import { Grid } from '@mui/material';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar/NavBar';
 import Card from '../components/Products/Card';
 import dataTestsIds from '../utils/dataTestIds';
+
+const TotalButtonValue = styled.button`
+  background-color: #C94E35;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+  color: #FFF;
+  font-weight: bold;
+  margin: auto;
+  border: 3px solid black;
+`;
+
+const DivButton = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -96,19 +114,16 @@ function Products() {
             ))
           }
         </Grid>
-        <button
-          type="button"
-          data-testid={ `${dataTestsIds[21]}` }
-          onClick={ () => history.push('/customer/checkout') }
-          disabled={ isDisabled }
-          className="cartBtn"
-        >
-          VER CARRINHO: R$
-          {' '}
-          <span data-testid={ `${dataTestsIds[22]}` }>
-            {calcProducts().toFixed(2).replace('.', ',')}
-          </span>
-        </button>
+        <DivButton>
+          <TotalButtonValue
+            type="button"
+            data-testid={ `${dataTestsIds[21]}` }
+            onClick={ () => history.push('/customer/checkout') }
+            disabled={ isDisabled }
+          >
+            {`VER CARRINHO: R$ ${calcProducts().toFixed(2).replace('.', ',')}`}
+          </TotalButtonValue>
+        </DivButton>
       </main>
     </div>
   );
