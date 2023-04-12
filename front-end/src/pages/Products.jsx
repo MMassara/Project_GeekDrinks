@@ -13,7 +13,7 @@ function Products() {
 
   useEffect(() => {
     axios.get('http://localhost:3001/products').then(({ data }) => {
-      const localProducts = JSON.parse(localStorage.getItem('products'));
+      const localProducts = JSON.parse(localStorage.getItem('products')) || [];
       const stateProducts = data.map((allData) => ({ ...allData, quantity: 0 }));
       const reponse = stateProducts.map((element) => {
         const objt = localProducts.find((product) => product.name === element.name);
