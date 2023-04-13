@@ -11,7 +11,7 @@ const create = async (req, res) => {
         const id = await userService.createUser({ name, email, password, role });
         const payload = {
         name,
-        id,
+        id: id.id,
     };
 
     const token = jwt.sign(payload, JWT_SECRET);

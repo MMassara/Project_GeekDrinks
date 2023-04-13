@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 import api, { setToken } from '../axios/config';
 import AddressForm from '../components/Cart/AddressForm';
 import Countdown from '../components/Cart/Countdown';
 import Table from '../components/Cart/Table';
-import Navbar from '../components/NavBar';
+import Navbar from '../components/NavBar/NavBar';
 import calcTotalPrice from '../utils/calcTotalPrice';
+
+const Main = styled.section`
+    background-color: #FFF3E0;
+    height: 100vh;
+    section {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+    }
+  `;
 
 export default function Cart() {
   const [products, setProducts] = useState([]);
@@ -64,27 +76,33 @@ export default function Cart() {
   };
 
   const handleChange = ({ target: { name, value } }) => {
+    console.log('NAME:', name);
+    console.log('VALUE:', value);
     setNewSale((prevState) => ({ ...prevState, [name]: value }));
   };
 
   return (
-    <section>
+    <Main>
       {isFinish ? (
         <Countdown saleId={ sallesApi } />
       ) : (
-        <section>
+        <>
           <Navbar />
-          <Table
-            products={ products }
-            removeProduct={ removeProduct }
-          />
-          <AddressForm
-            sellers={ sellers }
-            finishPurchase={ finishPurchase }
-            handleChange={ handleChange }
-          />
-        </section>
+          <section>
+            <Table
+              products={ products }
+              removeProduct={ removeProduct }
+            />
+            <AddressForm
+              sellers={ sellers }
+              finishPurchase={ finishPurchase }
+              handleChange={ handleChange }
+              deliveryAddress={ newSale.deliveryAddress }
+              deliveryNumber={ newSale.deliveryNumber }
+            />
+          </section>
+        </>
       )}
-    </section>
+    </Main>
   );
 }

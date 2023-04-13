@@ -1,8 +1,28 @@
+import { Grid } from '@mui/material';
+import styled from 'styled-components';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import NavBar from '../components/NavBar';
+import NavBar from '../components/NavBar/NavBar';
+import Card from '../components/Products/Card';
 import dataTestsIds from '../utils/dataTestIds';
+
+const TotalButtonValue = styled.button`
+  background-color: #C94E35;
+  padding: 10px;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+  color: #FFF;
+  font-weight: bold;
+  margin: auto;
+  border: 3px solid black;
+`;
+
+const DivButton = styled.div`
+  display: flex;
+  justify-content: center;
+`;
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -11,18 +31,29 @@ function Products() {
 
   useEffect(() => {
     axios.get('http://localhost:3001/products').then(({ data }) => {
-      setProducts(data.map((allData) => ({ ...allData, quantity: 0 })));
+      const localProducts = JSON.parse(localStorage.getItem('products')) || [];
+      const stateProducts = data.map((allData) => ({ ...allData, quantity: 0 }));
+      const reponse = stateProducts.map((element) => {
+        const objt = localProducts.find((product) => product.name === element.name);
+        if (objt) {
+          return objt;
+        }
+        return element;
+      });
+      // const filteredProducts = localProducts.filter(({ quantity }) => quantity > 0);
+      setProducts(reponse);
     });
   }, []);
 
   useEffect(() => {
-    function setProductsOnLocalStorage() {
-      const filteredProducts = products.filter(({ quantity }) => quantity > 0);
-      localStorage.setItem('products', JSON.stringify(filteredProducts));
-      setIsDisabled(!products.some(({ quantity }) => quantity > 0));
-    }
-    setProductsOnLocalStorage();
+    setIsDisabled(!products.some(({ quantity }) => quantity > 0));
   }, [products]);
+
+  function setProductsOnLocalStorage() {
+    const filteredProducts = products.filter(({ quantity }) => quantity > 0);
+    localStorage.setItem('products', JSON.stringify(filteredProducts));
+    // setIsDisabled(!products.some(({ quantity }) => quantity > 0));
+  }
 
   const handleChange = (id, value) => {
     setProducts((prevProducts) => prevProducts.map((product) => {
@@ -40,6 +71,7 @@ function Products() {
       }
       return product;
     }));
+    setProductsOnLocalStorage();
   };
 
   const decrement = (id) => {
@@ -49,6 +81,7 @@ function Products() {
       }
       return product;
     }));
+    setProductsOnLocalStorage();
   };
 
   const calcProducts = () => products.map(({ quantity, price }) => (
@@ -61,72 +94,36 @@ function Products() {
         <NavBar />
       </header>
       <main>
-        {
-          products?.map((product, index) => (
-            <section key={ index }>
-              <figure className="imgCard">
-                <img
-                  data-testid={ `${dataTestsIds[17]}${product.id}` }
-                  src={ product.urlImage }
-                  alt={ product.name }
-                  style={ { height: '100px',
-                    width: '100px' } }
-                />
-                <p data-testid={ `${dataTestsIds[16]}${product.id}` }>
-                  { `R$ ${product.price.replace('.', ',')}` }
-                </p>
-              </figure>
-              <div>
-                <p data-testid={ `${dataTestsIds[15]}${product.id}` }>
-                  { product.name }
-                </p>
-              </div>
-
-              <div className="product-quantity">
-                <button
-                  type="button"
-                  data-testid={ `${dataTestsIds[19]}${product.id}` }
-                  onClick={ () => decrement(product.id) }
-                >
-                  -
-                </button>
-
-                <input
-                  data-testid={ `${dataTestsIds[20]}${product.id}` }
-                  type="number"
-                  name={ `input${index}` }
-                  value={ product.quantity }
-                  min="0"
-                  onChange={
-                    ({ target: { value } }) => handleChange(product.id, Number(value))
-                  }
-                />
-
-                <button
-                  type="button"
-                  data-testid={ `${dataTestsIds[18]}${product.id}` }
-                  onClick={ () => increment(product.id) }
-                >
-                  +
-                </button>
-              </div>
-
-            </section>
-          ))
-        }
-        <button
-          type="button"
-          data-testid={ `${dataTestsIds[21]}` }
-          onClick={ () => history.push('/customer/checkout') }
-          disabled={ isDisabled }
-          className="cartBtn"
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          style={ { backgroundColor: '#FFF3E0' } }
+          sx={ { mt: 3, mb: 2 } }
         >
-          VER CARRINHO: R$
-          {' '}
-          <span data-testid={ `${dataTestsIds[22]}` }>
-            {calcProducts().toFixed(2).replace('.', ',')}
-          </span>
-        </button>
+          {
+            products?.map((product) => (
+              <Card
+                key={ product.id }
+                product={ product }
+                handleChange={ handleChange }
+                increment={ increment }
+                decrement={ decrement }
+              />
+            ))
+          }
+        </Grid>
+        <DivButton>
+          <TotalButtonValue
+            type="button"
+            data-testid={ `${dataTestsIds[21]}` }
+            onClick={ () => history.push('/customer/checkout') }
+            disabled={ isDisabled }
+          >
+            {`VER CARRINHO: R$ ${calcProducts().toFixed(2).replace('.', ',')}`}
+          </TotalButtonValue>
+        </DivButton>
       </main>
     </div>
   );

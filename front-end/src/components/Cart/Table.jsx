@@ -1,7 +1,50 @@
 import propTypes from 'prop-types';
+import styled from 'styled-components';
 import React from 'react';
 import calcTotalPrice from '../../utils/calcTotalPrice';
 import dataTestsIds from '../../utils/dataTestIds';
+import './style.css';
+
+const ListOrders = styled.table`
+
+  .tableItemsTr {
+    border: 1px solid black;
+  }
+  .itemIndex {
+    background-color: #DC8332;
+  }
+
+  .description {
+    background-color: #EEB82E;
+    width: 98%;
+  }
+
+  .quantity {
+    background-color: #DC8332;
+  }
+
+  .price {
+    background-color: #EEB82E;
+  }
+
+  .totalPrice {
+    background-color: #DC8332;
+  }
+
+  .removeCollumnBtn {
+    background-color: #EEB82E;
+    border: none;
+    width: 100%;
+  }
+  
+  .tableItem {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+`;
 
 export default function Table({ products, removeProduct }) {
   const thArr = [
@@ -15,9 +58,11 @@ export default function Table({ products, removeProduct }) {
 
   return (
     <div className="tableContainer">
-      <h1 className="tableTitle">Finalizar Pedido</h1>
+      <div className="tableTitle">
+        <h1>Detalhes do pedido</h1>
+      </div>
       <section className="tableSection">
-        <table className="table">
+        <ListOrders className="table">
           <thead>
             <tr>
               {thArr.map((element, index) => (
@@ -25,7 +70,7 @@ export default function Table({ products, removeProduct }) {
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className="listOrder">
             {products.map(({ name, price, quantity }, i) => (
               <tr key={ i } className="tableItemsTr">
                 <td
@@ -59,10 +104,10 @@ export default function Table({ products, removeProduct }) {
                   <p className="totalPrice tableItem">
                     {`R$ ${(Number(price) * Number(quantity))
                       .toFixed(2).replace('.', ',')}`}
-
                   </p>
                 </td>
                 <td>
+
                   <button
                     type="button"
                     data-testid={ `${dataTestsIds[28]}${i}` }
@@ -72,11 +117,12 @@ export default function Table({ products, removeProduct }) {
                     Remover
 
                   </button>
+
                 </td>
               </tr>
             ))}
           </tbody>
-        </table>
+        </ListOrders>
         <h1 data-testid={ `${dataTestsIds[29]}` } className="tableTotalPrice">
           {products.length && `Total: R$ ${calcTotalPrice(products)}`}
         </h1>
