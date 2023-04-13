@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
 import './style.css';
 
+export default function AddressForm({ sellers, finishPurchase, handleChange }) {
+
 const Details = styled.div`
   display: flex;
   flex-direction: row;
