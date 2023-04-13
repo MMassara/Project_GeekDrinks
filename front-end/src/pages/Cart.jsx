@@ -76,6 +76,8 @@ export default function Cart() {
   };
 
   const handleChange = ({ target: { name, value } }) => {
+    console.log('NAME:', name);
+    console.log('VALUE:', value);
     setNewSale((prevState) => ({ ...prevState, [name]: value }));
   };
 
@@ -95,6 +97,8 @@ export default function Cart() {
               sellers={ sellers }
               finishPurchase={ finishPurchase }
               handleChange={ handleChange }
+              deliveryAddress={ newSale.deliveryAddress }
+              deliveryNumber={ newSale.deliveryNumber }
             />
           </section>
         </>
