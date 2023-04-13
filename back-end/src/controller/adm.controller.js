@@ -8,10 +8,10 @@ const getUsers = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const { role } = req;
+  const adminRole = req.role;
   const { id } = req.params;
 
-  if (role !== 'administrator') {
+  if (adminRole !== 'administrator') {
     return res.status(409).json({ message: 'Acess denied' });
   }
 

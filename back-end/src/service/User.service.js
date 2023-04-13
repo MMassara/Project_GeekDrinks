@@ -11,18 +11,6 @@ const createUser = async ({ name, email, password, role }) => {
   return newUser.id;
 };
 
-const findOne = async (type, value) => {
-  const result = {};
-  result[type] = value;
-  
-  const user = await User.findOne({
-      where: { ...result },
-    });
-  
-    return user;
-  };
-
 module.exports = {
   createUser,
-  findOne,
 };

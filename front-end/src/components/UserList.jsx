@@ -12,7 +12,7 @@ export default function UserList() {
 
   // useEffect(() => {
   //   async function fetchAPI(body) {
-  //     const getUsers = await api.get('/admin/users', body.headers.Authorization);
+  //     const getUsers = await api.get('/admin/users', body);
   //     setUserList(getUsers);
   //   }
   //   if (user) {
