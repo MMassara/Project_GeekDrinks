@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import dataTestsIds from '../utils/dataTestIds';
+import axios from 'axios';
 
 function AdminForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [role, setRole] = useState('');
+  const [user, setUser] = useState({});
   const [disableLoginButton, setDisableLoginButton] = useState(true);
 
   const handleChangeRole = ({ target: { value } }) => setRole(value);
@@ -29,6 +31,21 @@ function AdminForm() {
     }
   }, [email, password, name, role]);
 
+  useEffect(() => {
+    const userInformation = JSON.parse(localStorage.getItem('user'));
+    setUser(userInformation);
+  }, []);
+
+  const register = async () => {
+    await axios.post(`http://localhost:3001/admin/user/register`, {
+      name,
+      email,
+      password,
+      role,
+    }, { headers: {authorization: user.token } });
+    console.log(name)
+  }
+  console.log(user)
   return (
     <section>
       <section>
@@ -74,10 +91,11 @@ function AdminForm() {
             <option value="seller">Seller</option>
           </select>
           <button
-            type="submit"
+            type="button"
             className="registerBtn"
             data-testid={ dataTestsIds[68] }
             disabled={ disableLoginButton }
+            onClick={ register }
           >
             CADASTRAR
           </button>

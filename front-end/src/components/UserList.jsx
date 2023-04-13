@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import dataTestsIds from '../utils/dataTestIds';
 
 export default function UserList() {
   const [user, setUser] = useState({});
@@ -22,6 +23,8 @@ export default function UserList() {
   
   const remove = async (id) => {
     await axios.delete(`http://localhost:3001/admin/user/${id}`, { headers: { Authorization: user.token } });
+    const getUsers = await axios.get('http://localhost:3001/admin/users');
+      setUserList(getUsers);
   }
 
   return (
@@ -39,15 +42,16 @@ export default function UserList() {
         </thead>
         <tbody>
           {
-            console.log('list', userList) || userList.data?.map((user) => (
+            console.log('list', userList) || userList.data?.map((user, index) => (
               <tr key={user.id}>
-                <td>{ user.id }</td>
-                <td>{ user.name }</td>
-                <td>{ user.email }</td>
-                <td>{ user.role }</td>
+                <td data-testid={ `${dataTestsIds[70]}${index}` } >{ user.id }</td>
+                <td data-testid={ `${dataTestsIds[71]}${index}` }>{ user.name }</td>
+                <td data-testid={ `${dataTestsIds[72]}${index}` }>{ user.email }</td>
+                <td data-testid={ `${dataTestsIds[73]}${index}` }>{ user.role }</td>
                 <td>
                   <button
                     onClick={ () => remove(user.id) }
+                    data-testid={ `${dataTestsIds[74]}${index}` }
                   >
                     Remover
                   </button>
