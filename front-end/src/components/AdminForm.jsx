@@ -1,6 +1,6 @@
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import dataTestsIds from '../utils/dataTestIds';
-import axios from 'axios';
 
 function AdminForm() {
   const [name, setName] = useState('');
@@ -37,15 +37,13 @@ function AdminForm() {
   }, []);
 
   const register = async () => {
-    await axios.post(`http://localhost:3001/admin/user/register`, {
+    await axios.post('http://localhost:3001/admin/user/register', {
       name,
       email,
       password,
       role,
-    }, { headers: {authorization: user.token } });
-    console.log(name)
-  }
-  console.log(user)
+    }, { headers: { authorization: user.token } });
+  };
   return (
     <section>
       <section>

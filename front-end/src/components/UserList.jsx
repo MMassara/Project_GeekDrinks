@@ -17,15 +17,15 @@ export default function UserList() {
       setUserList(getUsers);
     }
     if (user) {
-    fetchAPI();
+      fetchAPI();
     }
   }, [user]);
-  
+
   const remove = async (id) => {
     await axios.delete(`http://localhost:3001/admin/user/${id}`, { headers: { Authorization: user.token } });
     const getUsers = await axios.get('http://localhost:3001/admin/users');
-      setUserList(getUsers);
-  }
+    setUserList(getUsers);
+  };
 
   return (
     <>
@@ -42,21 +42,22 @@ export default function UserList() {
         </thead>
         <tbody>
           {
-            console.log('list', userList) || userList.data?.map((user, index) => (
-              <tr key={user.id}>
-                <td data-testid={ `${dataTestsIds[70]}${index}` } >{ user.id }</td>
-                <td data-testid={ `${dataTestsIds[71]}${index}` }>{ user.name }</td>
-                <td data-testid={ `${dataTestsIds[72]}${index}` }>{ user.email }</td>
-                <td data-testid={ `${dataTestsIds[73]}${index}` }>{ user.role }</td>
+            console.log('list', userList) || userList.data?.map((item, index) => (
+              <tr key={ user.id }>
+                <td data-testid={ `${dataTestsIds[70]}${index}` }>{ item.id }</td>
+                <td data-testid={ `${dataTestsIds[71]}${index}` }>{ item.name }</td>
+                <td data-testid={ `${dataTestsIds[72]}${index}` }>{ item.email }</td>
+                <td data-testid={ `${dataTestsIds[73]}${index}` }>{ item.role }</td>
                 <td>
                   <button
+                    type="button"
                     onClick={ () => remove(user.id) }
                     data-testid={ `${dataTestsIds[74]}${index}` }
                   >
                     Remover
                   </button>
                 </td>
-             </tr>
+              </tr>
             ))
           }
         </tbody>
