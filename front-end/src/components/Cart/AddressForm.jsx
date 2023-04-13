@@ -3,6 +3,8 @@ import React from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
 
 export default function AddressForm({ sellers, finishPurchase, handleChange }) {
+  // teste
+
   return (
     <section className="cartSection">
       <h2>Detalhes e Endereço para Entrega</h2>
