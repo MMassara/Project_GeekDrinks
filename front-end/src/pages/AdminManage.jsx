@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 
 import AdminForm from '../components/AdminForm';
-import AdminNavBar from '../components/AdminNavBar';
+import AdminNavBar from '../components/AdminNavBar/AdminNavBar';
 import UserList from '../components/UserList';
 // import api from '../axios/config';
 
