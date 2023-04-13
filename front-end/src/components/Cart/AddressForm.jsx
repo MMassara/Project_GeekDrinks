@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { Grid, Paper, TextField } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import dataTestsIds from '../../utils/dataTestIds';
 import './style.css';
 
@@ -44,7 +44,8 @@ const FinishButton = styled.button`
   font-weight: 600;
 `;
 
-export default function AddressForm({ sellers, finishPurchase, handleChange }) {
+export default function AddressForm({ sellers,
+  finishPurchase, handleChange, deliveryAddress, deliveryNumber }) {
   return (
     <section className="cartSection">
       <h2>Endereço para Entrega</h2>
@@ -70,6 +71,8 @@ export default function AddressForm({ sellers, finishPurchase, handleChange }) {
               required
               component={ Paper }
               onChange={ handleChange }
+              name="deliveryAddress"
+              value={ deliveryAddress }
             />
           </label>
           <label htmlFor="houseNumber">
@@ -78,6 +81,8 @@ export default function AddressForm({ sellers, finishPurchase, handleChange }) {
               required
               component={ Paper }
               onChange={ handleChange }
+              name="deliveryNumber"
+              value={ deliveryNumber }
             />
           </label>
           <FinishButton

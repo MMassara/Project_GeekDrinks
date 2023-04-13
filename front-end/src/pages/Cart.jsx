@@ -96,7 +96,9 @@ export default function Cart() {
             <AddressForm
               sellers={ sellers }
               finishPurchase={ finishPurchase }
-              onChange={ handleChange }
+              handleChange={ handleChange }
+              deliveryAddress={ newSale.deliveryAddress }
+              deliveryNumber={ newSale.deliveryNumber }
             />
           </section>
         </>
