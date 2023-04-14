@@ -8,12 +8,12 @@ const getUsers = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  const adminRole = req.role;
+  // const adminRole = req.role;
   const { id } = req.params;
 
-  if (adminRole !== 'administrator') {
-    return res.status(409).json({ message: 'Acess denied' });
-  }
+  // if (adminRole !== 'administrator') {
+  //   return res.status(409).json({ message: 'Acess denied' });
+  // }
 
   await admService.deleteUser(id);
 
@@ -21,12 +21,12 @@ const deleteUser = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const adminRole = req.role;
+  // const adminRole = req.role;
   const { name, email, password, role } = req.body;
 
-  if (adminRole !== 'administrator') {
-    return res.status(409).json({ message: 'Acess denied' });
-  }
+  // if (adminRole !== 'administrator') {
+  //   return res.status(409).json({ message: 'Acess denied' });
+  // }
 
   const userPassword = md5(password);
   await admService.createUser(name, email, userPassword, role);

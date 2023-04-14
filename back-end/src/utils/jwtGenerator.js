@@ -12,12 +12,15 @@ const generateToken = (payload) =>
 
 const decodeToken = (token) => jwt.decode(token, JWT_SECRET);
 
-const tokenValidation = async (req, res) => {
-  const token = req.headers.Authorization;
+const tokenValidation = async (req, res, next) => {
+  const token = req.headers.authorization;
+  console.log('token', token);
 
   if (!token) {
     return res.status(401).json({ message: 'Token not found' });
   }
+
+  return next();
 };
 
 const registerValidation = async (req, res, next) => {

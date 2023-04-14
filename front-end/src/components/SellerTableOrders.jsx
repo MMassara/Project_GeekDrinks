@@ -1,6 +1,6 @@
+import styled from 'styled-components';
 import propTypes from 'prop-types';
 import dataTestsIds from '../utils/dataTestIds';
-import styled from 'styled-components';
 
 const SellerOrdersDetails = styled.table`
   margin-top: 30px;
@@ -31,9 +31,7 @@ const SellerOrdersDetails = styled.table`
     padding: 5px;
     border-radius: 5px;
   }
-  
-`
-
+`;
 export default function SellerTableOrders({ order: { items } }) {
   const totalPrice = (price, quant) => {
     const total = price * quant;

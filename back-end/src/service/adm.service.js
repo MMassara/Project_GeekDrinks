@@ -26,6 +26,7 @@ const createUser = async (name, email, password, role) => {
     password,
     role,
   });
+  console.log('data', data);
 
   return data;
 };

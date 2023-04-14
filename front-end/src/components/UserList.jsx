@@ -3,6 +3,41 @@ import axios from 'axios';
 import styled from 'styled-components';
 import dataTestsIds from '../utils/dataTestIds';
 
+const AdminUserTable = styled.table`
+  margin-top: 30px;
+  .tableOrder-id {
+    background-color: #DC8332;
+  }
+
+  .tableOrder-name {
+    background-color: #FFF;
+    width: 98%;
+    margin: 5px;
+  }
+
+  .tableOrder-email {
+    background-color: #DC8332;
+    margin: 5px;
+  }
+
+  .tableOrder-role {
+    background-color: #FFF;
+  }
+
+  .tableOrder-button {
+    background-color: #DC8332;
+    border: none;
+    width: 100%
+  }
+  
+  .tableOrder-item {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    border-radius: 5px;
+  }
+`;
+
 const Section = styled.section`
   display: flex;
   justify-content: center;
@@ -29,7 +64,7 @@ const Title = styled.h2`
   // font-family: 'Press Start 2P', cursive;
 `;
 
-export default function UserList() {
+export default function UserList({ click }) {
   const [user, setUser] = useState({});
   const [userList, setUserList] = useState([]);
 
@@ -38,30 +73,32 @@ export default function UserList() {
     setUser(userInformation);
   }, []);
 
+  async function fetchAPI() {
+    const getUsers = await axios.get('http://localhost:3001/admin/users');
+    setUserList(getUsers);
+  }
+
   useEffect(() => {
-    async function fetchAPI() {
-      const getUsers = await axios.get('http://localhost:3001/admin/users');
-      setUserList(getUsers);
-    }
     if (user) {
       fetchAPI();
     }
-  }, [user]);
+  }, [user, click]);
 
   const remove = async (id) => {
+    console.log('testetable');
+    console.log('id', id);
     await axios.delete(`http://localhost:3001/admin/user/${id}`, { headers: { Authorization: user.token } });
-    const getUsers = await axios.get('http://localhost:3001/admin/users');
-    setUserList(getUsers);
+    fetchAPI();
   };
 
   return (
     <Section>
       <Div>
         <Title>Lista de usuários</Title>
-        <table>
+        <AdminUserTable>
           <thead>
             <tr>
-              <th>Item</th>
+              <th>ID</th>
               <th>Nome</th>
               <th>E-mail</th>
               <th>Tipo</th>
@@ -72,14 +109,23 @@ export default function UserList() {
             {
               console.log('list', userList) || userList.data?.map((item, index) => (
                 <tr key={ user.id }>
-                  <td data-testid={ `${dataTestsIds[70]}${index}` }>{item.id}</td>
-                  <td data-testid={ `${dataTestsIds[71]}${index}` }>{item.name}</td>
-                  <td data-testid={ `${dataTestsIds[72]}${index}` }>{item.email}</td>
-                  <td data-testid={ `${dataTestsIds[73]}${index}` }>{item.role}</td>
+                  <td data-testid={ `${dataTestsIds[70]}${index}` }>
+                    <p className="tableOrder-id tableOrder-item">{item.id}</p>
+                  </td>
+                  <td data-testid={ `${dataTestsIds[71]}${index}` }>
+                    <p className="tableOrder-name tableOrder-item">{item.name}</p>
+                  </td>
+                  <td data-testid={ `${dataTestsIds[72]}${index}` }>
+                    <p className="tableOrder-email tableOrder-item">{item.email}</p>
+                  </td>
+                  <td data-testid={ `${dataTestsIds[73]}${index}` }>
+                    <p className="tableOrder-role tableOrder-item">{item.role}</p>
+                  </td>
                   <td>
                     <button
                       type="button"
-                      onClick={ () => remove(user.id) }
+                      className="tableOrder-button tableOrder-item"
+                      onClick={ () => remove(item.id) }
                       data-testid={ `${dataTestsIds[74]}${index}` }
                     >
                       Remover
@@ -89,7 +135,7 @@ export default function UserList() {
               ))
             }
           </tbody>
-        </table>
+        </AdminUserTable>
       </Div>
     </Section>
   );

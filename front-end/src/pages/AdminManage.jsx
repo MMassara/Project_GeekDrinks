@@ -1,5 +1,5 @@
 import React, {
-// useState,
+useState,
 // useEffect,
 } from 'react';
 
@@ -9,11 +9,12 @@ import UserList from '../components/UserList';
 // import api from '../axios/config';
 
 function AdminManage() {
+  const [click, setClick] = useState(false);
   return (
     <div>
       <AdminNavBar />
-      <AdminForm />
-      <UserList />
+      <AdminForm setClick={ setClick } click={ click } />
+      <UserList click={ click } />
     </div>
   );
 }

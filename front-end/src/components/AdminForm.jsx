@@ -56,7 +56,7 @@ const Button = styled.button`
   }
 `;
 
-function AdminForm() {
+function AdminForm({ setClick, click }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -91,12 +91,14 @@ function AdminForm() {
   }, []);
 
   const register = async () => {
+    console.log('teste');
     await axios.post('http://localhost:3001/admin/user/register', {
       name,
       email,
       password,
       role,
     }, { headers: { authorization: user.token } });
+    setClick(!click);
   };
   return (
     <Section>
