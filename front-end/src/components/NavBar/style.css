@@ -2,6 +2,7 @@
 
 * {
     font-family: Roboto;
+    text-align: center;
 }
 
 .main-container {
@@ -13,6 +14,8 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: center;
+    color: #FFF;
 }
 
 .logo-class {
@@ -22,4 +25,5 @@
 
 .logout-area {
     display: flex;
+    gap: 15px;
 }

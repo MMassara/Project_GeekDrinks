@@ -20,52 +20,6 @@ function NavBar() {
     <div className="main-container">
       <nav className="nav-area">
         <img src={ logoImage } className="logo-class" alt="geek drinks" />
-        <Stack spacing={ 2 } direction="row">
-          {storage.role === 'customer' ? (
-            <Button
-              type="button"
-              className="nav-button"
-              data-testid={ dataTestsIds[11] }
-              variant="contained"
-              style={ {
-                backgroundColor: '#D36934',
-                height: '4vh',
-                width: '120px',
-                marginTop: '40px',
-                textDecoration: 'none',
-              } }
-            >
-              <Link
-                to="/customer/products"
-                style={ {
-                  textDecoration: 'none',
-                  color: 'white',
-                } }
-              >
-                Produtos
-              </Link>
-            </Button>
-          ) : null}
-
-          <Button
-            type="button"
-            variant="contained"
-            data-testid={ dataTestsIds[12] }
-            style={ {
-              backgroundColor: '#D36934',
-              height: '4vh',
-              width: '120px',
-              marginTop: '40px',
-            } }
-          >
-            <Link
-              to={ `/${storage.role}/orders` }
-              style={ { textDecoration: 'none', color: 'white' } }
-            >
-              Pedidos
-            </Link>
-          </Button>
-        </Stack>
         <div className="logout-area">
           <p
             style={ {
@@ -79,6 +33,51 @@ function NavBar() {
           >
             {storage.name}
           </p>
+          <Stack spacing={ 2 } direction="row">
+            {storage.role === 'customer' ? (
+              <Button
+                type="button"
+                className="nav-button"
+                data-testid={ dataTestsIds[11] }
+                variant="contained"
+                style={ {
+                  backgroundColor: '#D36934',
+                  height: '4vh',
+                  width: '120px',
+                  marginTop: '40px',
+                  textDecoration: 'none',
+                } }
+              >
+                <Link
+                  to="/customer/products"
+                  style={ {
+                    textDecoration: 'none',
+                    color: 'white',
+                  } }
+                >
+                  Produtos
+                </Link>
+              </Button>
+            ) : null}
+            <Button
+              type="button"
+              variant="contained"
+              data-testid={ dataTestsIds[12] }
+              style={ {
+                backgroundColor: '#D36934',
+                height: '4vh',
+                width: '120px',
+                marginTop: '40px',
+              } }
+            >
+              <Link
+                to={ `/${storage.role}/orders` }
+                style={ { textDecoration: 'none', color: 'white' } }
+              >
+                Pedidos
+              </Link>
+            </Button>
+          </Stack>
           <Link to="/" style={ { textDecoration: 'none', color: 'white' } }>
             <Button
               type="button"
