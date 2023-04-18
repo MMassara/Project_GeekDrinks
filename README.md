@@ -1,10 +1,7 @@
-# :construction: README em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto.
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Projeto desenvolvido em grupo de 5 (cinco) pessoas estudantes, utilizando a metodologia Kanban. A aplicação simula um site de delivery de bebidas, sendo possível criar o login, selecionar os produtos e efetuar o pagamento bem como visualizar todos os pedidos realizados. Ao logar como pessoa administradora, é possível cadastrar e excluir usuários da aplicação. Ao logar como pessoa vendedora, é possível visualizar todos os pedidos feitos em seu nome e atualizar o status da encomenda. 
+
+No front-end, foi utilizado React para o desenvolvimento das páginas. Para back-end, é utilizado MySQL como banco de dados e Sequelize para seu gerenciamento. Na estilização, é aplicado MUI, Styled-Components e CSS puro.
+
+Para rodar o projeto, clone o repositório em sua máquina. Após, digite o comando npm install para instalar as dependências do projeto. Em seguida, entre na pasta do back-end e digite o comando npm run dev no terminal do diretório. Por fim, entre na pasta do front-end e digite o comando npm start para testar a aplicação. 
+
+Estou aberto a quaisquer dicas e feedbacks!
